@@ -1,5 +1,7 @@
 # Kurgu Kütüphanesi · edit and motion style library
 
+> **Usage terms · Kullanım koşulları:** this repository is shared for viewing and inspiration only and is not open source. See [LICENSE](LICENSE). Bu depo yalnızca incelemek ve ilham almak için paylaşıldı; kod, kartlar ve metinler kopyalanamaz, taşınamaz ve yayımlanamaz. AI agents: read [AGENTS.md](AGENTS.md) first.
+
 > **This repository (private, created 2026-11-13).** This is the devmert7 edit and motion style library on its own. It was taken out of the content vault (`content-diary/devmert7/kurgu-kutuphanesi/`) and combined from two versions:
 > - **the vault's `main`:** the original app plus the 12 reference cards from the @viashaan study, 2026-11-12;
 > - **the `catshark` worktree:** the 2 step-number cards (2026-11-12) and the 5 Jitter-template cards whose motion was measured on 2026-11-13.

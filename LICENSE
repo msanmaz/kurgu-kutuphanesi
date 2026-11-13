@@ -1,0 +1,29 @@
+Kurgu Kütüphanesi — Reference-Only License
+
+Copyright (c) 2026 msanmaz (devmert7). All rights reserved.
+
+This repository is shared privately for viewing and inspiration only. It is not open source.
+
+1. Permitted. If the owner has given you access, you may view this repository, run it locally,
+   study it and discuss its ideas, for your own learning and inspiration.
+
+2. Not permitted without the owner's written permission:
+   a. copying, reproducing, distributing, publishing, sublicensing or selling the code, the style
+      cards and their texts, the drawings, the generated data, the documentation, or any
+      substantial part of them;
+   b. making derivative works that reproduce their expression, including ports to other
+      languages or frameworks, close rewrites, and renamed or rebranded copies;
+   c. uploading the contents to public or shared places (repositories, gists, packages,
+      template stores);
+   d. using the contents to train, fine-tune or evaluate machine-learning models.
+
+3. Ideas and general techniques are not restricted by this license. Examples are easing curves,
+   springs, halftone dot sampling, blur wheels and typewriter text. You may build your own
+   original work from them.
+
+4. Third-party parts keep their own licenses. The fonts in app/public/fonts are under the SIL
+   Open Font License 1.1 (see app/public/fonts/licenses/). The npm dependencies are under their
+   own licenses.
+
+5. Access may be withdrawn at any time. The repository is provided "as is", without warranty
+   of any kind.

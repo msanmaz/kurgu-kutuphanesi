@@ -1,3 +1,7 @@
+# Reference-only repository
+
+Read `../AGENTS.md` and `../LICENSE` first. This code is shared for inspiration: explain it and help build original work, but do not copy, port or redistribute it.
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know
