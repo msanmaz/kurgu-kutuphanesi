@@ -1,0 +1,64 @@
+{
+  "id": "adim-kilit-ekrani",
+  "group": "Yazı",
+  "name": "Kilit ekranı rakamı",
+  "line": "Adım numarası kilit ekranı saati gibi kafanın arkasında, rengini kareden alır. Üstünde küçük bir tarih satırı durur.",
+  "when": "Yüz beat'inde adım değişirken; kafa arkası kinetik soruyla (Q1) birlikte.",
+  "tags": [
+    "matte",
+    "kareden renk",
+    "yüz",
+    "adımlar"
+  ],
+  "rules": [
+    "Rakam Inter 900 ≈ 520–560 px, harf aralığı −.04em. Tabanı ≈ y 1060; kafa rakamın en çok %35'ini kapatır, rakam okunur kalır.",
+    "Dolgu kareden (Kafa arkası \"Kareden renk\" kuralı, creator 2026-11-12): karenin bulanık görüntüsü + arkaplandan örneklenen en güçlü renk. Açık duvarda koyulaşır; Mert'in odasında neondan koyu kırmızı çıkar.",
+    "Tarih satırı: JetBrains Mono 34 px, harf aralığı .2em, \"ADIM 1 · REQUIREMENT'LARI OKU\". Kafa alanının üstünde durur ve rakamdan 0,15 sn önce belirir.",
+    "Giriş: rakam 40 px aşağıdan yumuşak yayla (ζ 0,8, 0,5 sn) yükselir; bulanıklık 12'den 0 px'e, ölçek 0,94'ten 1'e (kilit ekranının açılışı gibi).",
+    "Adım değişimi saat hanesi gibi döner: eski rakam 0,32 sn'de 120 px yukarı kayıp söner, yenisi aşağıdan settle yayıyla gelir. Tarih satırı aynı anda yeni adıma geçer.",
+    "Rakamlar 560 px yüksekliğinde bir pencerede (y 560–1120) döner; pencerenin dışında görünmez.",
+    "Aynı çekimde ardışık adımlar; çekim değişirse renk yeniden örneklenir.",
+    "Baş kuralı: tarih satırı ve diğer yazılar kafa alanının dışında. Yalnız rakam, matte sayesinde kafanın arkasında."
+  ],
+  "vault": {
+    "status": "scoped",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Görünüş creator onaylı (ai-mulakat Reel'i için). Hareket Claude'un önerisi; hareket onayı bekliyor.",
+    "quote": "n5 aND N3 IS GOOD KEEP IN OUR EDIT LIBRARY ON devmert7/kurgu-kutuphanesi/app/ ON HOW THEIR MOTION WOULD BE..",
+    "quoteWho": "Creator, 2026-11-12, adım numarası seçenekleri (step-numbers.png) üzerine",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/sheets/step-numbers.png · N5",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/build.py · n_lock(), behind(), frame_colour()",
+      "50-design-language/reel-visual-language.md · 2026-11-12 baş kuralı ve kareden renk"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/frames/N/N5a–N5d.png"
+    ]
+  },
+  "template": "stepLock",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "claude",
+    "basis": "iOS kilit ekranı saati + creator'ın Pinterest \"number design\" araması (2026-11-12)"
+  },
+  "variations": [
+    {
+      "id": "adim-kilit-ekrani-duz",
+      "name": "Düz bordo dolgu",
+      "line": "Çekim yokken ya da renk örneklenemezken: rakam düz bordo.",
+      "changed": "Kareden renk yerine düz #8E1F3F",
+      "params": {
+        "fill": "solid"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "kanal vurgu rengi (brand-burgundy-desktop)"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

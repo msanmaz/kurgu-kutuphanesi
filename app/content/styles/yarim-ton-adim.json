@@ -1,0 +1,81 @@
+{
+  "id": "yarim-ton-adim",
+  "group": "Yazı",
+  "name": "Yarım ton adım numarası",
+  "line": "Adım numarası noktalı bir baskı gibi basılır: koyu poster zemin, gülkurusu-bordo noktalar, kişi önde. Adım 3'ten önce sayaç döner.",
+  "when": "Adım değişen yüz beat'leri (İlk / İki / Üç); 3 adımlı Reel'lerin yapısını gösteren tekrar eden işaret.",
+  "tags": [
+    "matte",
+    "poster",
+    "adımlar",
+    "sayaç"
+  ],
+  "rules": [
+    "Hareket (ölçüldü): kademeli animasyon (stepped animation) / sayı sayacı (number ticker). Her rakam tek karede sert kesmeyle gelir, sonraki rakama kadar hiçbir şey kıpırdamaz. Jitter'da her sayı 0,57 sn; bizde kesmeler adım sözcüklerine oturur.",
+    "Sayaç (roll on): \"Üç…\" duraklamasında hızlı bir sayaç 1 → 2, her biri 0,15 sn ve başka yazı tipi (Anton, Playfair italik), sonra 3. Şablondaki \"her sayıda başka yazı tipi\" (4 farklı yüzde).",
+    "Bizim seçenek: grow > 0 olursa noktalar satır satır yukarıdan basılır (settle yayı). Varsayılan 0 = şablondaki sert kesme.",
+    "Rakam Playfair Display 900, hizalı rakam (lnum; varsayılanı eski stil). 24 px ızgarada tam noktalar: hücrenin ortası harfin içindeyse nokta yanar, kenarlar basamaklı.",
+    "Poster: zemin #121211, 24 px'te #2a2827 noktalar; rakam noktaları üstte #D2557C, altta #8E1F3F. Yazılar: sol üst \"ADIM n / 3\", solda adım adı gülkurusu, sağ üst \"YAPAY ZEKALI / YAZILIM MÜLAKATI\".",
+    "Duvarda: oda kalır, rakam yalnız bordo noktalar; üstte JetBrains Mono adım satırı.",
+    "Baş kuralı: rakam kafanın arkasında (matte önde), yazılar kafa alanının dışında. Gerçek çekimde testte 12 karede 0 px."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-13",
+    "statusCheckedAt": "2026-11-13",
+    "note": "Gerçek çekimde (take v1) test edildi, baş kontrolü 0 px. Hareket Jitter önizlemesinden ölçüldü (docs/2026-11-13-jitter-motion-measurements.md); bizim uyarlamalar ayrıca yazılı. Görünüş ve hareket creator onayı bekliyor. Jitter dosyası/görselleri kullanılmadı.",
+    "quote": "can you use animation vocabulary skills and review jitter to get properly motions",
+    "quoteWho": "Creator, 2026-11-13, kartlar eklendikten sonra hareketlerin Jitter'a göre düzeltilmesini isterken",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/halftone-steps-test/README.md",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/halftone-steps-test/build.py",
+      "devmert7/kurgu-kutuphanesi/docs/2026-11-13-jitter-motion-measurements.md"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/halftone-steps-test/sheets/halftone-steps.png",
+      "https://jitter.video/template/halftone-counter-poster/"
+    ]
+  },
+  "template": "halftoneStep",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "Jitter şablonu · halftone-counter-poster",
+    "at": "4 sn döngü, 7 → 1",
+    "analysis": "devmert7/ai-mulakat-kabul-mu-kontrol-mu/halftone-steps-test/README.md"
+  },
+  "variations": [
+    {
+      "id": "yarim-ton-adim-duvar",
+      "name": "Duvarda yarım ton",
+      "line": "Oda kalır; rakam bordo noktalarla duvara basılır, kafanın arkasında.",
+      "changed": "Poster yerine çekimin odası",
+      "params": {
+        "look": "wall"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "halftone testi H1"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    },
+    {
+      "id": "yarim-ton-adim-sayacsiz",
+      "name": "Sayaçsız",
+      "line": "Her adım yalnız kendi rakamıyla basılır; Üç'ten önce dönüş yok.",
+      "changed": "Sayaç kapalı",
+      "params": {
+        "roll": "off"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "halftone testi H2, sayaçsız"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    }
+  ]
+}

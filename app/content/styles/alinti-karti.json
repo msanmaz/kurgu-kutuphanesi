@@ -1,0 +1,82 @@
+{
+  "id": "alinti-karti",
+  "group": "Ekleme",
+  "name": "Alıntı kartı",
+  "line": "Konuşanın kendi cümlesi buzlu cam kartta sözcük sözcük belirir; çekim bordo duotone olur ve %70'e çekilir, kart göğsün üstüne yükselir.",
+  "when": "Kaydedilecek ya da gönderilecek tek tutum cümlesi (\"Sesli anlatmak çok önemli\"); ya da kaynaktan kısa alıntı, kaynağa atfedilerek.",
+  "tags": [
+    "duotone",
+    "cam kart",
+    "alıntı",
+    "yüz"
+  ],
+  "rules": [
+    "Hareket (ölçüldü): kart kadrajın dışından kayarak girer (slide in, ease-out, 0,4 sn) → sözcükler kademeli (stagger) ≈ 0,07 sn arayla, her biri tek karede, solma yok → atıf için kart büyür (layout animation, 0,3 sn ease-out) ve isim harf harf yazılır (typewriter) → ≈ 1,5 sn bekleme → kart kayarak çıkar (slide out, ease-in, 0,4 sn).",
+    "Fotoğraf konuşanınki olmalı: Mert'in sözü Mert'in görüntüsünde. Başkasının sözü (DoorDash) kart düzeninde, kaynağına atfedilir.",
+    "Bizim uyarlama (şablonda yok): duotone'da çekim önce bordo olur ve settle yayıyla %70'e çekilir; çünkü bu çekimde yüz karenin alt yarısını dolduruyor, kart göğse ancak böyle sığar. Çekim olduğu gibiyse kart kafanın üstünden iner.",
+    "Duotone: gri tonlama, koyu → siyaha yakın, açık → bordo-gülkurusu. Kart arkasını 30 px bulanıklaştırır, kenar beyaz %16. Tırnaklar gülkurusu, atıf JetBrains Mono büyük harf.",
+    "Baş kuralı: kart kafanın dışında; Vision yüz kutusuyla gerçek çekim testinde 7 karede 0 px.",
+    "Açık nokta: çekimde Whisper \"sesle\" duydu, metin \"sesli\" diyor; kart onay gelene dek metindeki sözcüğü kullanır."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-13",
+    "statusCheckedAt": "2026-11-13",
+    "note": "Gerçek çekimde (take v1) test edildi, baş kontrolü 0 px. Hareket Jitter önizlemesinden ölçüldü (docs/2026-11-13-jitter-motion-measurements.md); bizim uyarlamalar ayrıca yazılı. Görünüş ve hareket creator onayı bekliyor. Jitter dosyası/görselleri kullanılmadı.",
+    "quote": "can you use animation vocabulary skills and review jitter to get properly motions",
+    "quoteWho": "Creator, 2026-11-13, kartlar eklendikten sonra hareketlerin Jitter'a göre düzeltilmesini isterken",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/quote-card-test/README.md",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/quote-card-test/build.py",
+      "devmert7/kurgu-kutuphanesi/docs/2026-11-13-jitter-motion-measurements.md"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/quote-card-test/sheets/quote-card.png",
+      "https://jitter.video/template/the-track-quote/"
+    ]
+  },
+  "template": "quoteCard",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "Jitter şablonu · the-track-quote",
+    "at": "5 sn döngü",
+    "analysis": "devmert7/ai-mulakat-kabul-mu-kontrol-mu/quote-card-test/README.md"
+  },
+  "variations": [
+    {
+      "id": "alinti-karti-ustte",
+      "name": "Üstte cam kart",
+      "line": "Çekim olduğu gibi kalır; kart kafanın üstüne iner.",
+      "changed": "Duotone yok, kart üstte",
+      "params": {
+        "look": "top"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "alıntı testi V1"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    },
+    {
+      "id": "alinti-karti-doordash",
+      "name": "Kaynak alıntısı · kart",
+      "line": "DoorDash'in cümlesi panelde, altında Türkçesi ve kaynağı; Mert kartta.",
+      "changed": "DoorDash alıntısı, kart düzeni, 0,12 sn/sözcük",
+      "params": {
+        "look": "card",
+        "quote": "doordash",
+        "perWord": 0.12
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "alıntı testi V3"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+{
+  "id": "panel",
+  "group": "Yerleşim",
+  "name": "PANEL üstte, yüz altta",
+  "line": "Mert konuşurken anlattığı şey üstteki kutuda görünür.",
+  "when": "Anlatılan şey gösterilebiliyorsa ve sesi yüz taşıyorsa. Bir FULL'den önce ve sonra yüz ya da PANEL gelir.",
+  "tags": [
+    "9:16",
+    "PANEL",
+    "FACE"
+  ],
+  "rules": [
+    "PANEL kutusu x 40–1040, y 60–660; ölçülen içerik alt kenarı ≤ 645 px, yüz açık kalır.",
+    "Kare 0: yüz ve PANEL'de görev ya da soru (2026-10-16'dan beri).",
+    "Altyazı alt kenarı 330 px, yüzde, PANEL'de ve FULL'de aynı.",
+    "Bir beat ya PANEL'dir ya FULL; yüz kutuya sıkıştırılmaz (reaksiyon kutusu reddedildi)."
+  ],
+  "vault": {
+    "status": "adopted",
+    "date": "2026-10-11",
+    "statusCheckedAt": "2026-10-25",
+    "quote": "reatino box is not approved we want sometimea gfull beat as mert talking with visual above and full beat for others not reaction box",
+    "quoteWho": "Creator, 2026-10-16. Görünüm F1 v9 ile benimsendi, 2026-10-11: \"this process and visual language was great\"",
+    "sources": [
+      "50-design-language/reel-visual-language.md · Frame and zones"
+    ],
+    "examples": [
+      "devmert7/kod-okuma-ai/take-f1-v9-2026-10-11/motion-v1/",
+      "devmert7/mulakat-kayan-pencere/take-v3-2026-10-23/motion-v1/"
+    ]
+  },
+  "template": "panel",
+  "params": {},
+  "caption": [
+    [
+      "ŞÖYLE ",
+      {
+        "k": "ÇALIŞIYOR"
+      }
+    ]
+  ],
+  "initialLabel": "Kullanımda",
+  "origin": {
+    "kind": "vault"
+  },
+  "variations": [
+    {
+      "id": "panel-yavas",
+      "name": "PANEL yavaş yayla",
+      "line": "Kutu daha yumuşak ve uzun bir yayla gelir (0,8 sn).",
+      "changed": "Yay 0,45 sn yerine 0,8 sn",
+      "params": {
+        "springDur": 0.8
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "panel parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "panel-gec",
+      "name": "PANEL geç giriş",
+      "line": "Kutu cümleye biraz geç girer (0,8 sn); önce yüz duyulur.",
+      "changed": "Giriş 0,35 sn yerine 0,8 sn",
+      "params": {
+        "enterAt": 0.8
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "panel parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    }
+  ]
+}

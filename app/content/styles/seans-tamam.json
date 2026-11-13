@@ -1,0 +1,81 @@
+{
+  "id": "seans-tamam",
+  "group": "Ekleme",
+  "name": "Seans tamam CTA'sı",
+  "line": "Anahtar kelime CTA'sı bir antrenman uygulamasının \"seans tamam\" ekranı gibi: bordo duotone, hareket izi, yazılan istatistikler ve anahtar kelimenin ızgara flaşı.",
+  "when": "Yorum anahtar kelimesiyle biten CTA (\"yoruma MÜLAKAT yaz, DM'den atayım\"), özellikle çalışma/pratik projesi verilen Reel'ler.",
+  "tags": [
+    "CTA",
+    "duotone",
+    "flaş",
+    "anahtar kelime"
+  ],
+  "rules": [
+    "Hareket (ölçüldü, şablonun sırası): siyah 0,35 sn → çakar (strobe: siyah ↔ kare sert kesmeler, 2 karede bir) 0,3 sn → duotone kare 0,2 sn → MÜLAKAT ızgarası, sonra ters daktilo (reverse typewriter) ile silinir: 12 fps kademeli, satırlar kademeli (stagger) başlar, 0,6 sn.",
+    "Sonra başlık sözcük sözcük (0,08 sn): \"Yoruma\", \"MÜLAKAT yaz.\" → istatistikler daktiloyla (saniyede 60 karakter) → gri takip karesi sert kesmeyle araya girer (0,5 sn) → sert kesmeyle geri, \"DM'den atayım.\" → siyaha kesme.",
+    "Anahtar kelime beyaz kutuda bordo (bordo zeminde bordo kutu kaybolur). Sağ altta yorum balonu ikonu (şablonun pist ikonundan). Takip karesinde x/y noktaları kafanın çevresinde, asla üstünde.",
+    "Hareket izi: koşucunun bulanıklığı yerine çekimin kendi önceki kareleri, soluk.",
+    "Uyarlama: Reel'de ızgara \"mülakat\" sözcüğüne de bağlanabilir; kartta şablonun sırası korunur.",
+    "İstatistikler planlanan repoyu anlatıyor (henüz yok, go-ahead bekliyor): repo çıkınca satırlar ona uymalı.",
+    "Baş kuralı: Vision yüz kutusuyla gerçek çekim testinde 4 karede 0 px."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-13",
+    "statusCheckedAt": "2026-11-13",
+    "note": "Gerçek çekimde (take v1) test edildi, baş kontrolü 0 px. Hareket Jitter önizlemesinden ölçüldü (docs/2026-11-13-jitter-motion-measurements.md); bizim uyarlamalar ayrıca yazılı. Görünüş ve hareket creator onayı bekliyor. Jitter dosyası/görselleri kullanılmadı.",
+    "quote": "can you use animation vocabulary skills and review jitter to get properly motions",
+    "quoteWho": "Creator, 2026-11-13, kartlar eklendikten sonra hareketlerin Jitter'a göre düzeltilmesini isterken",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/cta-session-test/README.md",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/cta-session-test/build.py",
+      "devmert7/kurgu-kutuphanesi/docs/2026-11-13-jitter-motion-measurements.md"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/cta-session-test/sheets/cta-session.png",
+      "https://jitter.video/template/the-track-session-complete/"
+    ]
+  },
+  "template": "sessionCta",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "Jitter şablonu · the-track-session-complete",
+    "at": "6 sn döngü",
+    "analysis": "devmert7/ai-mulakat-kabul-mu-kontrol-mu/cta-session-test/README.md"
+  },
+  "variations": [
+    {
+      "id": "seans-tamam-takipsiz",
+      "name": "Takip flaşı yok",
+      "line": "Doğrudan duotone posterle başlar.",
+      "changed": "Gri takip flaşı kapalı",
+      "params": {
+        "track": "off"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "CTA testi S1–S2"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    },
+    {
+      "id": "seans-tamam-izsiz",
+      "name": "İz yok",
+      "line": "Hareket izi olmadan, sade duotone.",
+      "changed": "Hareket izi kapalı",
+      "params": {
+        "trail": "off"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "CTA testi S1, izsiz"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    }
+  ]
+}

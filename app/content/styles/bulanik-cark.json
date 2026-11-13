@@ -1,0 +1,82 @@
+{
+  "id": "bulanik-cark",
+  "group": "Yazı",
+  "name": "Bulanık kelime çarkı",
+  "line": "Söylenen liste bir çarkta döner: ortadaki sözcük net ve beyaz, okla işaretli; üst ve alttakiler küçülür, bulanıklaşır, eğilir.",
+  "when": "Sözcük sözcük söylenen kısa liste: \"Harita, test ve küçük bir iş\" ya da DoorDash'in dört ölçütü.",
+  "tags": [
+    "liste",
+    "bulanıklık",
+    "matte",
+    "kart"
+  ],
+  "rules": [
+    "Hareket (ölçüldü): her 0,75 sn'de liste bir satır kayar (translate). Kayma ≈ 0,2 sn, asimetrik ease-in-out (cubic-bezier 0,45, 0, 0,15, 1): hız hareketin %32'sinde tepe yapar, uzun yavaş iniş.",
+    "Takip (follow-through): bulanıklık, ölçek ve renk konumu ≈ 0,35 sn geriden izler; yeni ortadaki sözcük kayma sırasında griden beyaza geçer (crossfade), iniş sonrası ≈ 0,3 sn daha oturur. Sonra ≈ 0,25 sn bekleme.",
+    "Satırlar bir silindirde (3D tilt): ortadan uzaklık d, açı d × 0,42 rad. Ölçek 0,62 + 0,38 cos, bulanıklık |d| = 1'de 2,2 px, sonra her satırda +3,2 px, gri #a9a49b, eğim d × 3°. Ok gülkurusu #D2557C, sözcük Inter 800.",
+    "Liste yalnız söylenen sözcükler. Adımlar listesi \"Nereden başlasam?\" ile başlar: cevaplar sorunun altından gelir.",
+    "DoorDash listesinde söylenenler gülkurusu ✓ alır; kaynak satırı (careers.doordash.com · 19 Mart 2026) ekranda kalır. Uzun satırlar çerçeveye sığacak kadar küçülür.",
+    "Baş kuralı: poster düzeninde çark kafanın arkasında, kart düzeninde kartın üstünde. Gerçek çekim testinde 11 karede 0 px."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-13",
+    "statusCheckedAt": "2026-11-13",
+    "note": "Gerçek çekimde (take v1) test edildi, baş kontrolü 0 px. Hareket Jitter önizlemesinden ölçüldü (docs/2026-11-13-jitter-motion-measurements.md); bizim uyarlamalar ayrıca yazılı. Görünüş ve hareket creator onayı bekliyor. Jitter dosyası/görselleri kullanılmadı.",
+    "quote": "can you use animation vocabulary skills and review jitter to get properly motions",
+    "quoteWho": "Creator, 2026-11-13, kartlar eklendikten sonra hareketlerin Jitter'a göre düzeltilmesini isterken",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/blur-scroller-test/README.md",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/blur-scroller-test/build.py",
+      "devmert7/kurgu-kutuphanesi/docs/2026-11-13-jitter-motion-measurements.md"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/blur-scroller-test/sheets/blur-scroller.png",
+      "https://jitter.video/template/blur-text-scroller/"
+    ]
+  },
+  "template": "blurWheel",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "Jitter şablonu · blur-text-scroller",
+    "at": "9 sn döngü, ≈ 0,7 sn/sözcük",
+    "analysis": "devmert7/ai-mulakat-kabul-mu-kontrol-mu/blur-scroller-test/README.md"
+  },
+  "variations": [
+    {
+      "id": "bulanik-cark-doordash",
+      "name": "DoorDash listesi · kart",
+      "line": "Dört ölçüt panelde döner, Mert kartta; söylenenler ✓ alır.",
+      "changed": "Liste DoorDash, kart düzeni, 1,2 sn/ölçüt",
+      "params": {
+        "list": "doordash",
+        "look": "card",
+        "per": 1.2
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "scroller testi C · L3"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    },
+    {
+      "id": "bulanik-cark-kart",
+      "name": "Adımlar · kart",
+      "line": "Harita, test, küçük iş panelde döner, Mert kartta.",
+      "changed": "Poster yerine kart düzeni",
+      "params": {
+        "look": "card"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "scroller testi A · L3"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    }
+  ]
+}

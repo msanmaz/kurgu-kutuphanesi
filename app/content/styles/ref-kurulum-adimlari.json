@@ -1,0 +1,61 @@
+{
+  "id": "ref-kurulum-adimlari",
+  "group": "Ekleme",
+  "name": "Numaralı kurulum kartı",
+  "line": "Başlık, hap, numaralı tek adım ve altında o adımı oynatan telefon; son adımda başlık CTA'ya döner.",
+  "when": "Bir kurulumun (bağlayıcı, MCP, ayar) adımlarını sonda topluca vermek için.",
+  "tags": [
+    "adım adım",
+    "1,1 sn/adım",
+    "sonda"
+  ],
+  "rules": [
+    "Bir anda tek adım: numara dairesi + kısa komut satırı (\"Ayarlar → Bağlayıcılar\"); ekran ona göre değişir.",
+    "Başlık Inter 800 78 px, altında bordo hap \"1 dakikada kurulum\"; son adımda başlık \"Yorum yaz “REPO”\", hap \"kurulum linki için\".",
+    "Onda (MIRACLE 15–22,6 sn) dört adım ≈ 1,8 sn'de bir; son 2 sn CTA.",
+    "Bizde telefon ekranı gerçek kayıt olur; bu kart şema."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Reel'den aday: kanalda henüz kullanılmadı; benimsemek creator'ın kararı.",
+    "quote": "review the videos of this apify or ytdl whivere gets the best free results and then understand breakdown editing style and etc to have some fresh ones added to our kurgu kutuphanesi",
+    "quoteWho": "Creator, 2026-11-12, @viashaan profilinin incelenmesini isterken",
+    "sources": [
+      "Reels/analysis_reference_viashaan_profile_2026-11-12.md · Edit devices 14"
+    ],
+    "examples": [
+      "https://www.instagram.com/reel/DfiYWMvMOqV/ (0:15–0:22.6)"
+    ]
+  },
+  "template": "setupSteps",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "@viashaan · DfiYWMvMOqV",
+    "at": "0:15–0:22.6",
+    "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+  },
+  "variations": [
+    {
+      "id": "ref-kurulum-adimlari-yavas",
+      "name": "Yavaş adımlar",
+      "line": "Adım başına 1,8 sn; onun ölçülen hızı.",
+      "changed": "1,1 yerine 1,8 sn",
+      "params": {
+        "stepDur": 1.8
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfiYWMvMOqV",
+        "at": "0:15–0:22.6",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

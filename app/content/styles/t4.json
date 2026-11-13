@@ -1,0 +1,95 @@
+{
+  "id": "t4",
+  "group": "Geçiş",
+  "name": "Kart kapanırken zoom (T4)",
+  "line": "Tam ekran yüzden tek bir dijital zoom out; aynı anda kart yerine oturur.",
+  "when": "Ana fikre ya da sonuç görseline girerken; çıkışta kart açılırken çıkarım satırına zoom in. Reel başına bir iki kez. (Kullanım rehberi Claude'un önerisi; her seçim storyboard'da onaylanır.)",
+  "tags": [
+    "POP",
+    "giriş · çıkış",
+    "≈ 0,5 sn"
+  ],
+  "rules": [
+    "Kritik sönümlü yay (ζ 1), ≈ 0,5 sn: yüz 1,2× → 1,0×. FULL'den sonra 1,12× → 1,0×.",
+    "Girişte PANEL, kart kenarı kutunun altına inince başlar: kart üstü 1020'de 6 kare, 1140'ta 5 kare sonra.",
+    "Çıkışta kart açılırken 1,0× → 1,2× zoom in.",
+    "Kod: devmert7/_tools/popout/transition_kit.py"
+  ],
+  "vault": {
+    "status": "scoped",
+    "date": "2026-10-24",
+    "statusCheckedAt": "2026-10-25",
+    "note": "Beş geçiş pop-out beatleri için kit olarak saklandı; pop-out'un kendisi hâlâ aday, kullanım rehberi Claude'un önerisi.",
+    "quote": "i like each cut save them and we can use when appropriate based on what we explain",
+    "quoteWho": "Creator, 2026-10-24, beş geçişi yan yana gördükten sonra",
+    "sources": [
+      "50-design-language/halfcut-talking-head-frame.md · Transition kit",
+      "70-production-pipeline/popout-halfcut-test-2026-10-24.md · Round 2–3"
+    ],
+    "examples": [
+      "devmert7/popout-halfcut-test-2026-10-24/renders/transitions/E_T4_kit.mp4"
+    ]
+  },
+  "template": "cardZoom",
+  "params": {},
+  "caption": [
+    [
+      "ANA ",
+      {
+        "k": "FİKRE"
+      },
+      " GEÇİŞ"
+    ]
+  ],
+  "initialLabel": "Düşünülüyor",
+  "origin": {
+    "kind": "vault"
+  },
+  "variations": [
+    {
+      "id": "t4-035",
+      "name": "T4 hızlı (0,35 sn)",
+      "line": "Aynı zoom ve kart, daha kısa bir yayla; daha sert hissettirir.",
+      "changed": "Yay 0,5 sn yerine 0,35 sn",
+      "params": {
+        "dur": 0.35
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "t4 parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "t4-070",
+      "name": "T4 yavaş (0,7 sn)",
+      "line": "Daha uzun, daha görünür bir zoom; ana fikre ağırlık verir.",
+      "changed": "Yay 0,5 sn yerine 0,7 sn",
+      "params": {
+        "dur": 0.7
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "t4 parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "t4-full-sonrasi",
+      "name": "T4, FULL'den sonra",
+      "line": "FULL kesmeden sonra yüz 1,12×'ten açılır, kitteki gibi.",
+      "changed": "Başlangıç 1,2× yerine 1,12×",
+      "params": {
+        "fromScale": 1.12
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "t4 parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    }
+  ]
+}

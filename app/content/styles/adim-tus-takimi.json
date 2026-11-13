@@ -1,0 +1,63 @@
+{
+  "id": "adim-tus-takimi",
+  "group": "Vurgu",
+  "name": "Adım tuşları (tuş takımı)",
+  "line": "Telefon tuş takımı, harflerin yerinde adım fiilleri: 1 OKU · 2 BUL · 3 SOR. Adım söylendiği an tuşu basılır.",
+  "when": "Adım adım anlatılan Reel'lerde (\"Sen önce şu üç adımı yap\"); 2–4 adım varken. Ekran beat'inde PANEL'in üstündeki bantta, yüz beat'inde kafanın üstünde.",
+  "tags": [
+    "adımlar",
+    "Apple arayüzü",
+    "üst bant"
+  ],
+  "rules": [
+    "Yerleşim: üç tuş ortalı, PANEL'in dosya sekmesinin üstündeki bantta (y 16–154). Yüz beat'inde kafanın üstünde. Kafa alanına asla girmez (baş kuralı, creator 2026-11-12).",
+    "Tuş: 138 px daire, rgba(255,255,255,.16) cam dolgu. Rakam Inter 300 66 px, fiil Inter 800 27 px (harf aralığı .16em). Tuşlar arası 46 px.",
+    "Giriş (\"üç adımı yap\" sözünde): tuşlar soldan sağa 0,08 sn arayla settle yayıyla (0,45 sn) 0,85'ten 1'e büyür, opaklık 0'dan 1'e.",
+    "Basış (Birinci/İkinci/Üçüncü sözünde): tuş 0,28 sn'de %92'ye iner ve döner. Dolgu 0,12 sn'de kreme (#F3E9C6) döner, rakam ve fiil koyulaşır. Bordo halka (#8E1F3F) 0,2 sn'de çizilir.",
+    "Biten adım: tuş cam dolguya döner; köşede 0,15 sn'de küçük yeşil ✓ belirir. Sıradaki tuş basılana kadar tek aktif tuş vardır.",
+    "Üç fiil (OKU · BUL · SOR) ekranda kalarak özeti görsel verir; sözlü özet yok (retention check 9).",
+    "Ses: her basışta tek kısa tık, konuşmayı bastırmıyorsa (sound-system: hareket eden her şeye bir ses).",
+    "Yazı tipi Inter. Apple'ın SF'i kullanılmaz: lisansı Apple platformu arayüz taslakları içindir, videomuz için değil. Apple logosu ya da markası yok."
+  ],
+  "vault": {
+    "status": "scoped",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Görünüş creator onaylı (ai-mulakat Reel'i için). Hareket Claude'un önerisi; hareket onayı bekliyor.",
+    "quote": "n5 aND N3 IS GOOD KEEP IN OUR EDIT LIBRARY ON devmert7/kurgu-kutuphanesi/app/ ON HOW THEIR MOTION WOULD BE..",
+    "quoteWho": "Creator, 2026-11-12, adım numarası seçenekleri (step-numbers.png) üzerine",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/sheets/step-numbers.png · N3",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/build.py · n_keypad()",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/README.md · Step numbers as everyday Apple UI"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/storyboard-v1/frames/N/N3a–N3d.png"
+    ]
+  },
+  "template": "stepKeypad",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "claude",
+    "basis": "Apple tuş takımı + creator'ın Pinterest \"number design\" araması (2026-11-12)"
+  },
+  "variations": [
+    {
+      "id": "adim-tus-takimi-yuz",
+      "name": "Yüz beat'inde, kafanın üstünde",
+      "line": "Aynı tuşlar çekimin üstünde, kafa alanının yukarısında.",
+      "changed": "PANEL üst bandı yerine kafanın üstü",
+      "params": {
+        "placement": "face"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "baş kuralı (creator, 2026-11-12)"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

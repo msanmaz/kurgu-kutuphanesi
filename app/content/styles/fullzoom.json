@@ -1,0 +1,102 @@
+{
+  "id": "fullzoom",
+  "group": "Zoom",
+  "name": "Önce tam ekran, sonra zoom",
+  "line": "Bilgisayar ekranı önce bütün pencereyle görünür, sonra önemli yere dijital zoom yapılır.",
+  "when": "Her editör, terminal ve tarayıcı ekranında; PANEL'de de FULL'de de. Ekran içinde başka bir ekrana kesince de önce tam görünüm.",
+  "tags": [
+    "FULL",
+    "PANEL",
+    "0,45 + 0,6 sn"
+  ],
+  "rules": [
+    "Tam görünüm ≈ 0,45 sn, zoom ≈ 0,6 sn; etiketler zoom oturduktan sonra, sözcüğünde.",
+    "Bütün uygulama penceresi yakalanır (VS Code'da explorer, sekmeler, durum çubuğu); 1600×900 css, 3×, zoom keskin kalsın diye.",
+    "Yakalamada fare yoksa gerçek fare konumu çizilir; özel yollar kaynakta maskelenir.",
+    "Uzun ekran fazla kesme yerine 2–3 zoom durağı taşır; her ≤ 3 sn'de yeni bir şey görünür.",
+    "Ekran her zaman gerçek kayıt ya da gerçek sayfa (2026-10-24). Çizilmiş pencere yalnız gerçek ekranı olmayan bir fikir için, \"temsili\" etiketiyle (2026-10-25)."
+  ],
+  "vault": {
+    "status": "adopted",
+    "date": "2026-10-21",
+    "statusCheckedAt": "2026-10-25",
+    "note": "2026-10-25'te vault'a da işlendi (reel-visual-language · Edit grammar); eski çerçevesiz terminal notu bununla değişti.",
+    "quote": "if its a computer screen we want to show the first full screen and digital zoom in to the place that matters… full screen of computer can be shown in panel and zooms in to the cursor o r whatever code editor was open at",
+    "quoteWho": "Creator, 2026-10-21, merge-conflict kontak sayfasında",
+    "sources": [
+      "50-design-language/reel-visual-language.md · Edit grammar",
+      "50-design-language/terminal-capture-frame.md (çerçevesiz kırpım, değişti)"
+    ],
+    "examples": [
+      "devmert7/merge-conflict-neyi-seciyorsun/take-2026-10-21/motion-v1/",
+      "devmert7/trend-repo-format-2026-10-24/storyboard-v1/"
+    ]
+  },
+  "template": "fullZoom",
+  "params": {},
+  "caption": [
+    [
+      "ÖNCE ",
+      {
+        "k": "TAM EKRAN"
+      }
+    ],
+    [
+      "SONRA ",
+      {
+        "k": "ZOOM"
+      }
+    ]
+  ],
+  "initialLabel": "Kullanımda",
+  "origin": {
+    "kind": "vault"
+  },
+  "variations": [
+    {
+      "id": "fullzoom-2durak",
+      "name": "İki zoom durağı",
+      "line": "Uzun ekranda bant ikinci satıra kayar; kesme yerine ikinci bir durak.",
+      "changed": "1 durak yerine 2",
+      "params": {
+        "stops": 2
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "fullzoom parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "fullzoom-3durak",
+      "name": "Üç zoom durağı",
+      "line": "Bant üç satırda durur; her ≤ 3 sn'de yeni bir şey.",
+      "changed": "1 durak yerine 3",
+      "params": {
+        "stops": 3
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "fullzoom parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "fullzoom-yumusak",
+      "name": "Daha az zoom (1,8×)",
+      "line": "Satır okunur, pencerenin çevresi de görünür kalır.",
+      "changed": "Zoom 2,3× yerine 1,8×",
+      "params": {
+        "scale": 1.8
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "fullzoom parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    }
+  ]
+}

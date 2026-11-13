@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+</head>
+<body>
+<title>Kurgu Kütüphanesi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: a sidebar library (sections) beside a card grid; each card is a 9:16 stage drawn in real
+   1080×1920 Reel coordinates, so zones and numbers are the production ones. Single dark look: the
+   approved dark interview Reel (mulakat-kayan-pencere take-v3), chosen by the creator 2026-10-24. */
+:root{
+  color-scheme:dark;
+  --ground:#141413; --ground-hi:#2a2826; --box:#161615; --win:#1E1E1E; --bar:#2A2A2C; --edge:#3a3a3c;
+  --text:#ECEAE4; --dim:#B9B6AC; --muted:#87867F; --paper:#FAF9F5;
+  --clay:#D97757; --confirm:#6B8F71; --sky:#6A9BCC; --reject:#B8564B;
+  --display:"Bebas Neue",Impact,"Arial Narrow",sans-serif;
+  --body:Inter,"Helvetica Neue",Arial,sans-serif;
+  --mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,var(--ground-hi) 0%,var(--ground) 70%) fixed,var(--ground);color:var(--text);font:400 15px/1.5 var(--body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:20px 40px}
+.app{display:grid;grid-template-columns:260px minmax(0,1fr);gap:20px;max-width:1380px;margin:0 auto;align-items:start}
+.side{position:sticky;top:calc(env(safe-area-inset-top,0px) + 20px);background:var(--box);border:1px solid var(--edge);border-radius:22px;padding:22px 14px 14px}
+.brand{padding:0 10px 18px}
+.brand h1{margin:0;font:400 44px/0.92 var(--display);letter-spacing:.4px;text-wrap:balance}
+.brand h1 em{font-style:normal;color:var(--clay)}
+.brand p{margin:8px 0 0;font:500 12px/1.4 var(--mono);color:var(--muted);letter-spacing:.4px}
+.nav{display:flex;flex-direction:column;gap:6px}
+.nav button{all:unset;cursor:pointer;display:flex;align-items:center;gap:12px;padding:11px 12px;border-radius:14px;color:var(--dim);font:500 16px var(--body)}
+.nav button .ic{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;font:700 13px var(--mono);color:#fff;flex:none}
+.nav button .n{margin-left:auto;font:500 13px var(--mono);color:var(--muted)}
+.nav button[aria-current="true"]{background:var(--bar);color:var(--text);box-shadow:inset 0 0 0 1px var(--edge)}
+.nav button:focus-visible,.card:focus-visible,.chip-f:focus-visible,.close:focus-visible,.toggle:focus-visible{outline:2px solid var(--clay);outline-offset:2px}
+.side .foot{margin:18px 10px 4px;font:500 11.5px/1.5 var(--mono);color:var(--muted)}
+.main{background:var(--box);border:1px solid var(--edge);border-radius:22px;min-width:0}
+.head{padding:24px 28px 18px;border-bottom:1px solid var(--edge)}
+.head h2{margin:0;font:400 40px/1 var(--display);letter-spacing:.4px}
+.head p{margin:8px 0 0;color:var(--dim);max-width:68ch}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip-f{all:unset;cursor:pointer;font:500 13px var(--body);color:var(--dim);padding:6px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--edge)}
+.chip-f[aria-pressed="true"]{background:var(--text);color:var(--ground);box-shadow:none}
+.chip-f:disabled{cursor:default;opacity:.38}
+.chip-f .c{font-family:var(--mono);font-size:11.5px;margin-left:6px;opacity:.75}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:20px;padding:24px 28px 28px}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:10px;background:var(--win);border:1px solid var(--edge);border-radius:20px;padding:10px 10px 14px;min-width:0}
+.card:hover{border-color:#55554f}
+.card .meta{padding:2px 6px 0;display:flex;flex-direction:column;gap:6px;min-width:0}
+.card h3{margin:0;font:600 17px/1.25 var(--body)}
+.card .line{margin:0;color:var(--dim);font-size:14px;line-height:1.45;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tags{display:flex;flex-wrap:wrap;gap:6px}
+.tag{font:500 12px/1 var(--body);color:var(--dim);background:var(--bar);padding:6px 9px;border-radius:999px}
+.empty{padding:48px 28px 56px;color:var(--dim);max-width:60ch}
+.empty strong{display:block;font:400 30px/1 var(--display);color:var(--text);margin-bottom:10px;letter-spacing:.3px}
+
+/* the 9:16 stage */
+.stage{position:relative;aspect-ratio:9/16;width:100%;max-width:100%;border-radius:14px;overflow:hidden;container-type:inline-size;background:var(--ground)}
+.stage svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage .badge{position:absolute;right:3.5cqw;top:3.5cqw;font:600 4.1cqw/1 var(--body);padding:2.2cqw 3.3cqw;border-radius:999px;background:rgba(20,20,19,.82);color:#fff;z-index:3;white-space:nowrap}
+.badge.adopted{background:var(--confirm)} .badge.scoped{background:var(--sky)} .badge.candidate{background:rgba(20,20,19,.82);box-shadow:inset 0 0 0 1px #8a897f}
+.badge.optional{background:rgba(20,20,19,.82);color:var(--dim)} .badge.rejected{background:var(--reject)}
+.cap{position:absolute;left:50%;bottom:17.19%;transform:translateX(-50%);font:400 7.22cqw/1 var(--display);color:#fff;background:rgba(20,20,19,.9);padding:1.48cqw 2.41cqw .93cqw;border-radius:1.3cqw;white-space:nowrap;z-index:2;text-transform:none}
+.cap b{font-weight:400;background:var(--clay);border-radius:.74cqw;padding:0 .93cqw;margin:0 .2cqw}
+.cap.pop{animation:pop .16s ease-out}
+@keyframes pop{from{transform:translateX(-50%) scale(.94)}to{transform:translateX(-50%) scale(1)}}
+.dims{display:none} .show-dims .dims{display:block}
+
+/* detail sheet */
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(8,8,8,.72);display:grid;place-items:center;
+  padding:max(16px,env(safe-area-inset-top,0px)) max(16px,env(safe-area-inset-right,0px)) max(16px,env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px))}
+.panel-d{background:var(--box);border:1px solid var(--edge);border-radius:24px;width:min(1040px,100%);max-height:100%;overflow:auto;display:grid;grid-template-columns:minmax(220px,340px) minmax(0,1fr);gap:26px;padding:24px}
+.panel-d .stage{border:1px solid var(--edge)}
+.panel-d h2{margin:0;font:400 38px/1 var(--display);letter-spacing:.3px;text-wrap:balance}
+.panel-d .sub{margin:8px 0 14px;color:var(--dim)}
+.panel-d h4{margin:18px 0 6px;font:700 12px var(--mono);letter-spacing:1.2px;text-transform:uppercase;color:var(--muted)}
+.panel-d ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:5px}
+.panel-d li{line-height:1.5}
+.quote{margin:0;padding:12px 14px;border-radius:12px;background:var(--win);border:1px solid var(--edge);font:500 14px/1.5 var(--mono);color:var(--text)}
+.quote span{display:block;margin-top:6px;font:400 12.5px var(--body);color:var(--muted)}
+.src{font:500 13px/1.6 var(--mono);color:var(--dim);overflow-wrap:anywhere}
+.row-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.close{all:unset;cursor:pointer;font:600 14px var(--body);padding:8px 14px;border-radius:999px;background:var(--bar);color:var(--text)}
+.toggle{all:unset;cursor:pointer;margin-top:12px;display:inline-flex;gap:8px;align-items:center;font:500 13px var(--body);color:var(--dim);padding:7px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--edge)}
+.toggle[aria-pressed="true"]{color:var(--text);box-shadow:inset 0 0 0 1px var(--clay)}
+.status{display:inline-block;font:600 12.5px/1 var(--body);padding:6px 10px;border-radius:999px;color:#fff}
+.status.adopted{background:var(--confirm)} .status.scoped{background:var(--sky)} .status.candidate{background:transparent;box-shadow:inset 0 0 0 1px #8a897f;color:var(--text)}
+.status.optional{background:transparent;box-shadow:inset 0 0 0 1px var(--edge);color:var(--dim)} .status.rejected{background:var(--reject)}
+.note{color:var(--dim);font-size:13.5px;margin:6px 0 0}
+
+@media (max-width:860px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:static;padding:16px 10px 10px}
+  .brand{padding:0 8px 12px}
+  .nav{flex-direction:row;flex-wrap:wrap}
+  .nav button{padding:9px 10px}
+  .side .foot{display:none}
+  .head,.grid{padding-left:16px;padding-right:16px}
+  .panel-d{grid-template-columns:minmax(0,1fr)}
+  .panel-d .stage{max-width:300px;justify-self:center}
+}
+@media (max-width:560px){
+  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+  .card{padding:7px 7px 10px;gap:8px;border-radius:16px}
+  .card .meta{padding:0 3px}
+  .card h3{font-size:14.5px}
+  .card .line{font-size:12.5px}
+  .tag{font-size:11px;padding:5px 7px}
+}
+@media (prefers-reduced-motion:reduce){.cap.pop{animation:none}}
+</style>
+
+<div class="app">
+  <aside class="side" aria-label="Bölümler">
+    <div class="brand">
+      <h1>Kurgu <em>Kütüphanesi</em></h1>
+      <p>devmert7 · vault'taki kurgu stilleri</p>
+    </div>
+    <nav class="nav" id="nav"></nav>
+    <p class="foot">Kartlar 1080×1920 Reel ölçüleriyle çizildi. Durumlar vault kayıtlarından; "Benimsendi" yalnız creator onayı olanlar.</p>
+  </aside>
+  <main class="main">
+    <div class="head">
+      <h2 id="sec-title">Stiller</h2>
+      <p id="sec-desc"></p>
+      <div class="filters" id="filters" role="group" aria-label="Gruplar"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" hidden></div>
+  </main>
+</div>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="d-title">
+  <div class="panel-d">
+    <div>
+      <div class="stage" id="d-stage"></div>
+      <button class="toggle" id="d-dims" aria-pressed="false" type="button">Ölçüleri göster</button>
+    </div>
+    <div>
+      <div class="row-top">
+        <div>
+          <h2 id="d-title"></h2>
+          <p class="sub" id="d-line"></p>
+        </div>
+        <button class="close" id="d-close" type="button">Kapat</button>
+      </div>
+      <div id="d-status"></div>
+      <h4>Ne zaman</h4><p id="d-when" style="margin:0"></p>
+      <h4>Kurallar ve ölçüler</h4><ul id="d-rules"></ul>
+      <h4>Karar</h4><p class="quote" id="d-quote"></p>
+      <h4>Kaynak</h4><div class="src" id="d-src"></div>
+      <h4>Gerçek örnek</h4><div class="src" id="d-ex"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- data: one entry per edit style, sourced from the vault ---------- */
+const SECTIONS = [
+  {id:"stiller", name:"Stiller", ic:"S", color:"var(--clay)", desc:"Tek tek kurgu ve hareket teknikleri. Bir beat için seç: kartta ne zaman kullanılacağı, tıklayınca kuralları, ölçüleri, kararın kendisi ve vault kaynağı var."},
+  {id:"gorunumler", name:"Görünümler", ic:"G", color:"var(--sky)", desc:"Bir projenin genel görünümü: zemin, kutular, pencereler, yazı.", empty:"Koyu görünüm 2026-10-25'ten beri yeni Reel'lerin varsayılanı; F1 açık zemin istenirse kullanılır. Görünüm kartları sıradaki adımda eklenecek."},
+  {id:"red", name:"Reddedilenler", ic:"R", color:"var(--reject)", desc:"Denenip reddedilenler, tekrar kullanılmasın diye.", empty:"Reaksiyon kutusu (2026-10-16) ve diğer reddedilenler burada olacak. İlk 5 kartın çizim dili onaylanınca eklenecek."},
+];
+const GROUPS = ["Yerleşim","Geçiş","Zoom","Ekran","Vurgu","Hareket","Yazı","Ekleme"];
+const STATUS = {adopted:"Benimsendi", scoped:"Kapsamlı onay", candidate:"Aday", optional:"İsteğe bağlı", rejected:"Reddedildi"};
+
+const STYLES = [
+ {id:"panel", sec:"stiller", group:"Yerleşim", name:"PANEL üstte, yüz altta",
+  line:"Mert konuşurken anlattığı şey üstteki kutuda görünür.",
+  when:"Anlatılan şey gösterilebiliyorsa ve sesi yüz taşıyorsa. Bir FULL'den önce ve sonra yüz ya da PANEL gelir.",
+  tags:["9:16","PANEL","FACE"], status:"adopted", date:"2026-10-11",
+  rules:["PANEL kutusu x 40–1040, y 60–660; ölçülen içerik alt kenarı ≤ 645 px, yüz açık kalır.","Kare 0: yüz ve PANEL'de görev ya da soru (2026-10-16'dan beri).","Altyazı alt kenarı 330 px, yüzde, PANEL'de ve FULL'de aynı.","Bir beat ya PANEL'dir ya FULL; yüz kutuya sıkıştırılmaz (reaksiyon kutusu reddedildi)."],
+  quote:"reatino box is not approved we want sometimea gfull beat as mert talking with visual above and full beat for others not reaction box",
+  quoteWho:"Creator, 2026-10-16. Görünüm F1 v9 ile benimsendi, 2026-10-11: \"this process and visual language was great\"",
+  src:["50-design-language/reel-visual-language.md · Frame and zones"],
+  ex:["devmert7/kod-okuma-ai/take-f1-v9-2026-10-11/motion-v1/","devmert7/mulakat-kayan-pencere/take-v3-2026-10-23/motion-v1/"],
+  cap:[["ŞÖYLE ",["ÇALIŞIYOR"]]], draw:"panel"},
+ {id:"popout", sec:"stiller", group:"Yerleşim", name:"Pop-out yarım kesim",
+  line:"Çekim yuvarlak bir kartın içinde; kafa kartın üst kenarından sayfaya taşar.",
+  when:"PANEL beatlerinde, yüzü bir kutuya sıkıştırmadan görsel ile yüzü birlikte göstermek için.",
+  tags:["9:16","POP","matte"], status:"candidate",
+  statusNote:"Koyu görünüm trend-repo storyboard'u için seçildi (2026-10-24, kapsamlı). Varsayılan olup olmadığı açık.",
+  rules:["Kart x 40–1040, üst köşe yarıçapı 36, alttan taşar.","Kart üstü, çekimde ölçülen kafa üstünden: 1020 (şapka) ya da 1140 (şapka ve saç).","Kafa, Apple Vision kişi matte'inden: 90–200 açılır, 1 px aşındırılır, σ 1,0 yumuşatılır; yalnız kart üstünün üstünde görünür (+24 px yumuşak kenar).","Yeşil perde yok; kart gerçek odayı gösterir.","PANEL klibi değişmez; kutu y 60–660, içerik ≤ 645."],
+  quote:"update our vault halfcut to make matching the nick and the other guy we wont have green screen or anything",
+  quoteWho:"Creator, 2026-10-24",
+  src:["50-design-language/halfcut-talking-head-frame.md","devmert7/HALFCUT-FRAME.md","devmert7/_tools/popout/"],
+  ex:["devmert7/popout-halfcut-test-2026-10-24/","devmert7/trend-repo-format-2026-10-24/storyboard-v1/"],
+  cap:[["KAFA ",["DIŞARI"]," TAŞAR"]], draw:"popout"},
+ {id:"t4", sec:"stiller", group:"Geçiş", name:"Kart kapanırken zoom (T4)",
+  line:"Tam ekran yüzden tek bir dijital zoom out; aynı anda kart yerine oturur.",
+  when:"Ana fikre ya da sonuç görseline girerken; çıkışta kart açılırken çıkarım satırına zoom in. Reel başına bir iki kez. (Kullanım rehberi Claude'un önerisi; her seçim storyboard'da onaylanır.)",
+  tags:["POP","giriş · çıkış","≈ 0,5 sn"], status:"scoped", date:"2026-10-24", statusNote:"Beş geçiş pop-out beatleri için kit olarak saklandı; pop-out'un kendisi hâlâ aday, kullanım rehberi Claude'un önerisi.",
+  rules:["Kritik sönümlü yay (ζ 1), ≈ 0,5 sn: yüz 1,2× → 1,0×. FULL'den sonra 1,12× → 1,0×.","Girişte PANEL kesmeden 6 kare sonra başlar (kart üstü 1020; 1140'ta 5 kare): kart kenarı kutunun altına inmeden kutu gelmez.","Çıkışta kart açılırken 1,0× → 1,2× zoom in.","Kod: devmert7/_tools/popout/transition_kit.py"],
+  quote:"i like each cut save them and we can use when appropriate based on what we explain",
+  quoteWho:"Creator, 2026-10-24, beş geçişi yan yana gördükten sonra",
+  src:["50-design-language/halfcut-talking-head-frame.md · Transition kit","70-production-pipeline/popout-halfcut-test-2026-10-24.md · Round 2–3"],
+  ex:["devmert7/popout-halfcut-test-2026-10-24/renders/transitions/E_T4_kit.mp4"],
+  cap:[["ANA ",["FİKRE"]," GEÇİŞ"]], draw:"t4"},
+ {id:"fullzoom", sec:"stiller", group:"Zoom", name:"Önce tam ekran, sonra zoom",
+  line:"Bilgisayar ekranı önce bütün pencereyle görünür, sonra önemli yere dijital zoom yapılır.",
+  when:"Her editör, terminal ve tarayıcı ekranında; PANEL'de de FULL'de de. Ekran içinde başka bir ekrana kesince de önce tam görünüm.",
+  tags:["FULL","PANEL","0,45 + 0,6 sn"], status:"adopted", date:"2026-10-21",
+  statusNote:"2026-10-25'te vault'a da işlendi (reel-visual-language · Edit grammar); eski çerçevesiz terminal notu bununla değişti.",
+  rules:["Tam görünüm ≈ 0,45 sn, zoom ≈ 0,6 sn; etiketler zoom oturduktan sonra, sözcüğünde.","Bütün uygulama penceresi yakalanır (VS Code'da explorer, sekmeler, durum çubuğu); 1600×900 css, 3×, zoom keskin kalsın diye.","Yakalamada fare yoksa gerçek fare konumu çizilir; özel yollar kaynakta maskelenir.","Uzun ekran fazla kesme yerine 2–3 zoom durağı taşır; her ≤ 3 sn'de yeni bir şey görünür.","Ekran her zaman gerçek kayıt ya da gerçek sayfa (2026-10-24). Çizilmiş pencere yalnız gerçek ekranı olmayan bir fikir için, \"temsili\" etiketiyle (2026-10-25)."],
+  quote:"if its a computer screen we want to show the first full screen and digital zoom in to the place that matters… full screen of computer can be shown in panel and zooms in to the cursor o r whatever code editor was open at",
+  quoteWho:"Creator, 2026-10-21, merge-conflict kontak sayfasında",
+  src:["50-design-language/reel-visual-language.md · Edit grammar","50-design-language/terminal-capture-frame.md (çerçevesiz kırpım, değişti)"],
+  ex:["devmert7/merge-conflict-neyi-seciyorsun/take-2026-10-21/motion-v1/","devmert7/trend-repo-format-2026-10-24/storyboard-v1/"],
+  cap:[["ÖNCE ",["TAM EKRAN"]],["SONRA ",["ZOOM"]]], draw:"fullzoom"},
+ {id:"caption", sec:"stiller", group:"Yazı", name:"Altyazı hapı",
+  line:"Bebas, en çok üç sözcük; anahtar sözcük kil renkli iç hapta.",
+  when:"Her konuşma anında; yüzde, PANEL'de ve FULL'de aynı yerde.",
+  tags:["her beat","≤ 3 sözcük"], status:"adopted", date:"2026-10-11",
+  rules:["Bebas Neue 78 px, beyaz, rgba(20,20,19,.9) hap, yarıçap 14, iç boşluk 16/26/10.","Anahtar sözcük #D97757 iç hapta.","Parça başına en çok 3 sözcük; dengeli böl, tek sözcük kuyruk bırakma.","Alt kenar 330 px; 150 px'te Reels arayüzünün altında kalıyordu.","Metin düzeltilmiş sözcüklerden; belirsiz sözcük tahmin edilmez, kulakla kontrol edilir."],
+  quote:"this process and visual language was great",
+  quoteWho:"Creator, 2026-10-11, F1 v9 görsel dili için",
+  src:["50-design-language/reel-visual-language.md · Captions"],
+  ex:["Bütün kayıtlı Reel'ler; örnek: devmert7/mulakat-kayan-pencere/take-v3-2026-10-23/motion-v1/"],
+  cap:[["İNSANLAR ",["ŞU AN"]],[["CLAUDE CODE'A"]," VERİP"],["İÇİNDEKİ ",["REKLAMLARI"]]], draw:"caption"},
+];
+
+/* ---------- springs: the same as devmert7/_tools/popout/transition_kit.py ---------- */
+const settle = (t, dur = .45) => { if (t <= 0) return 0; const w = 6.64 / dur; return 1 - (1 + w * t) * Math.exp(-w * t); };
+const soft = (t, dur = .45, z = .8) => { if (t <= 0) return 0; const w = 4.2 / (z * dur), wd = w * Math.sqrt(1 - z * z);
+  return 1 - Math.exp(-z * w * t) * (Math.cos(wd * t) + z / Math.sqrt(1 - z * z) * Math.sin(wd * t)); };
+const lerp = (a, b, p) => a + (b - a) * p;
+const clamp01 = (x) => Math.max(0, Math.min(1, x));
+
+/* ---------- drawing kit, in Reel pixels (viewBox 1080×1920) ---------- */
+let uid = 0;
+function person(id) {   // a flat presenter: shoulders, neck, head, cap (he records in a cap)
+  return `<g id="${id}">
+    <rect x="150" y="1330" width="780" height="760" rx="330" fill="#2b2b2e"/>
+    <rect x="482" y="1180" width="116" height="180" rx="40" fill="#a87d5f"/>
+    <ellipse cx="540" cy="1085" rx="160" ry="185" fill="#B98C6B"/>
+    <path d="M378 1010 C 378 880, 702 880, 702 1010 Z" fill="#CDB79A"/>
+    <rect x="372" y="996" width="336" height="30" rx="15" fill="#bba584"/>
+  </g>`;
+}
+function takeBg(gid) {   // the take's room: warm interior with a window strip
+  return `<rect width="1080" height="1920" fill="url(#${gid})"/>
+    <rect x="0" y="760" width="1080" height="250" fill="#9fb2b6" opacity=".28"/>
+    <rect x="0" y="1010" width="1080" height="40" fill="#000" opacity=".12"/>`;
+}
+function panelBox(build) {   // the PANEL zone with a light glowing data card, the dark interview look
+  return `<g data-r="panel">
+    <rect x="40" y="60" width="1000" height="585" rx="36" fill="#161615"/>
+    <rect x="120" y="120" width="840" height="64" rx="14" fill="#2A2A2C"/>
+    <rect x="150" y="140" width="${build ? 0 : 380}" height="24" rx="12" fill="#ECEAE4" data-r="ptitle"/>
+    <rect x="120" y="230" width="840" height="340" rx="28" fill="#EDEBE6" data-r="pcard"/>
+    ${[0,1,2,3,4,5].map(i => `<rect x="${160 + i * 128}" y="300" width="104" height="104" rx="18" fill="${i === 3 ? '#D97757' : '#BDB9AF'}" data-r="tile${i}"/>`).join("")}
+    <rect x="160" y="450" width="520" height="22" rx="11" fill="#BDB9AF"/>
+    <rect x="160" y="490" width="360" height="22" rx="11" fill="#D3D0C7"/>
+  </g>`;
+}
+const CODE = [   // [width, colour] tokens per line, VS Code dark colours
+  [[110,"#569CD6"],[150,"#9CDCFE"],[40,"#D4D4D4"],[220,"#DCDCAA"]],
+  [[60,"#C586C0"],[180,"#9CDCFE"],[260,"#CE9178"]],
+  [[130,"#569CD6"],[120,"#9CDCFE"],[40,"#D4D4D4"],[150,"#B5CEA8"]],
+  [[90,"#C586C0"],[200,"#DCDCAA"],[40,"#D4D4D4"],[240,"#9CDCFE"],[90,"#D4D4D4"]],
+  [[160,"#9CDCFE"],[40,"#D4D4D4"],[300,"#CE9178"]],
+  [[70,"#C586C0"],[260,"#DCDCAA"],[120,"#9CDCFE"]],
+  [[40,"#D4D4D4"]],
+];
+function windowRows(n, target) {
+  return Array.from({length: n}, (_, i) => {
+    let x = 150;
+    const toks = CODE[i % CODE.length].map(([w, c]) => { const r = `<rect x="${x}" y="${70 + i * 58}" width="${w}" height="24" rx="8" fill="${c}" opacity="${i === target ? 1 : .55}"/>`; x += w + 16; return r; }).join("");
+    return `<rect x="104" y="${74 + i * 58}" width="${i > 8 ? 30 : 16}" height="16" rx="4" fill="#5a5a5a"/>` + toks;
+  }).join("");
+}
+function dims(lines) {   // measurement overlay: [y, label] horizontal lines and boxes
+  return `<g class="dims" font-family="JetBrains Mono, monospace" font-size="34" fill="#9cc2e8" stroke="#141413" stroke-width="10" paint-order="stroke" stroke-linejoin="round">` +
+    lines.map(([kind, a, b, label]) => kind === "y"
+      ? `<line x1="0" x2="1080" y1="${a}" y2="${a}" stroke="#6A9BCC" stroke-width="4" stroke-dasharray="18 12" paint-order="normal"/>` +
+        (b === "r" || b === "ra" ? `<text x="1056" y="${b === "ra" ? a - 14 : a + 44}" text-anchor="end">${label}</text>` : `<text x="${b || 24}" y="${a - 14}">${label}</text>`)
+      : `<rect x="${a[0]}" y="${a[1]}" width="${a[2]}" height="${a[3]}" fill="none" stroke="#6A9BCC" stroke-width="4" stroke-dasharray="18 12" paint-order="normal"/><text x="${a[0] + 16}" y="${a[1] + a[3] - 18}">${label}</text>`).join("") + `</g>`;
+}
+
+/* each drawing returns {svg, frame(t, q)}; q(role) finds elements inside this stage */
+const DRAW = {
+  panel() {
+    const n = ++uid;
+    return {dur: 4,
+      svg: `<defs><linearGradient id="tk${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3d39"/><stop offset="1" stop-color="#211b19"/></linearGradient>${person("p" + n)}</defs>
+        ${takeBg("tk" + n)}<use href="#p${n}"/>${panelBox(true)}
+        ${dims([["b",[40,60,1000,600],"","PANEL x 40–1040 · y 60–660 · içerik ≤ 645"],["y",1590,"r","altyazı alt kenarı · 330 px"]])}`,
+      frame(t, q) {   // the PANEL springs in, its title types, the tiles land one by one
+        const p = soft(t - .35, .45);
+        q("panel").setAttribute("transform", `translate(540 352) scale(${lerp(.9, 1, p)}) translate(-540 -352)`);
+        q("panel").setAttribute("opacity", clamp01((t - .35) / .12) * (t > 3.7 ? clamp01((4 - t) / .3) : 1));
+        q("ptitle").setAttribute("width", 380 * clamp01((t - .8) / .5));
+        for (let i = 0; i < 6; i++) q("tile" + i).setAttribute("opacity", clamp01((t - 1.2 - i * .12) / .1));
+      }};
+  },
+  popout() {
+    const n = ++uid;
+    return {dur: 4,
+      svg: `<defs><radialGradient id="g${n}" cx="50%" cy="34%" r="75%"><stop offset="0" stop-color="#2a2826"/><stop offset=".7" stop-color="#141413"/></radialGradient>
+        <linearGradient id="tk${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3d39"/><stop offset="1" stop-color="#211b19"/></linearGradient>${person("p" + n)}
+        <clipPath id="cc${n}"><rect x="40" y="1140" width="1000" height="840" rx="36"/></clipPath>
+        <clipPath id="ab${n}"><rect x="0" y="0" width="1080" height="1164"/></clipPath></defs>
+        <rect width="1080" height="1920" fill="url(#g${n})"/>
+        <g clip-path="url(#cc${n})">${takeBg("tk" + n)}<use href="#p${n}"/></g>
+        <g clip-path="url(#ab${n})"><use href="#p${n}"/></g>
+        ${panelBox(true)}
+        ${dims([["y",1140,24,"kart üstü 1140"],["y",900,24,"kafa üstü ≈ 900"],["b",[40,60,1000,585],"","PANEL · içerik y 60–645"],["y",1590,"r","altyazı · 330 px"]])}`,
+      frame(t, q) {
+        q("panel").setAttribute("opacity", clamp01((t - .2) / .15) * (t > 3.7 ? clamp01((4 - t) / .3) : 1));
+        q("ptitle").setAttribute("width", 380 * clamp01((t - .5) / .5));
+        for (let i = 0; i < 6; i++) q("tile" + i).setAttribute("opacity", clamp01((t - .9 - i * .12) / .1));
+      }};
+  },
+  t4() {   // FACE 1.2× → pop-out: card top 0 → 1140 with the take zooming 1.2 → 1.0 (settle, 0.5 s); PANEL 6 frames later
+    const n = ++uid;
+    return {dur: 4.6,
+      svg: `<defs><radialGradient id="g${n}" cx="50%" cy="34%" r="75%"><stop offset="0" stop-color="#2a2826"/><stop offset=".7" stop-color="#141413"/></radialGradient>
+        <linearGradient id="tk${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3d39"/><stop offset="1" stop-color="#211b19"/></linearGradient>${person("p" + n)}
+        <clipPath id="cc${n}"><rect data-r="card" x="0" y="0" width="1080" height="1920" rx="0"/></clipPath>
+        <clipPath id="ab${n}"><rect data-r="above" x="0" y="0" width="1080" height="24"/></clipPath></defs>
+        <rect width="1080" height="1920" fill="url(#g${n})"/>
+        <g clip-path="url(#cc${n})"><g data-r="cam">${takeBg("tk" + n)}<use href="#p${n}"/></g></g>
+        <g clip-path="url(#ab${n})"><g data-r="cam2"><use href="#p${n}"/></g></g>
+        ${panelBox(false)}
+        <g data-r="cut" opacity="0"><rect x="380" y="840" width="320" height="64" rx="32" fill="#D97757"/><text x="540" y="884" fill="#fff" font-family="JetBrains Mono, monospace" font-size="34" text-anchor="middle">KESME</text></g>
+        ${dims([["y",1140,24,"kart üstü 1140"],["b",[40,60,1000,585],"","PANEL · kesmeden 6 kare sonra"]])}`,
+      frame(t, q) {
+        const tc = 1.0;   // the cut, on the sentence start
+        const p = settle(t - tc, .5), s = t < tc ? 1.2 : lerp(1.2, 1, p);
+        const cam = `translate(${560 - s * 560} ${1260 - s * 1260}) scale(${s})`;
+        q("cam").setAttribute("transform", cam); q("cam2").setAttribute("transform", cam);
+        const top = t < tc ? 0 : 1140 * p, x0 = t < tc ? 0 : 40 * p;
+        const card = q("card");
+        card.setAttribute("x", x0); card.setAttribute("y", top); card.setAttribute("width", 1080 - 2 * x0);
+        card.setAttribute("height", 1920 - top + 60); card.setAttribute("rx", 36 * (t < tc ? 0 : p));
+        q("above").setAttribute("height", top + 24);
+        const pt = t - tc - 6 / 30;   // PANEL waits 6 frames
+        q("panel").setAttribute("opacity", clamp01(pt / (4 / 30)) * (t > 4.3 ? clamp01((4.6 - t) / .3) : 1));
+        q("cut").setAttribute("opacity", t > tc - .02 && t < tc + .25 ? 1 : 0);
+      }};
+  },
+  fullzoom() {   // FULL: the whole window for 0.45 s, a 0.6 s zoom to the line, the band after it lands
+    const n = ++uid;
+    const target = 3, rowY = 70 + target * 58 + 12;   // window-local y of the target line
+    return {dur: 4.6,
+      svg: `<defs><radialGradient id="g${n}" cx="50%" cy="34%" r="75%"><stop offset="0" stop-color="#2a2826"/><stop offset=".7" stop-color="#141413"/></radialGradient>
+        <clipPath id="vw${n}"><rect x="40" y="190" width="1000" height="870" rx="26"/></clipPath></defs>
+        <rect width="1080" height="1920" fill="url(#g${n})"/>
+        <g clip-path="url(#vw${n})"><g data-r="win">
+          <rect x="0" y="0" width="968" height="560" rx="22" fill="#1E1E1E" stroke="#3a3a3c" stroke-width="2"/>
+          <rect x="0" y="0" width="968" height="44" rx="22" fill="#2A2A2C"/><rect x="0" y="22" width="968" height="22" fill="#2A2A2C"/>
+          <circle cx="30" cy="22" r="8" fill="#FF5F57"/><circle cx="56" cy="22" r="8" fill="#FEBC2E"/><circle cx="82" cy="22" r="8" fill="#28C840"/>
+          <rect x="0" y="44" width="80" height="516" fill="#232325"/>
+          <g transform="translate(0 30)">${windowRows(7, target)}</g>
+          <rect data-r="band" x="96" y="${30 + rowY - 30}" width="804" height="60" rx="10" fill="rgba(217,119,87,.22)" stroke="#D97757" stroke-width="5" opacity="0"/>
+        </g></g>
+        <rect data-r="phase" x="56" y="140" width="0" height="0" fill="none"/>
+        ${dims([["b",[40,190,1000,870],"","FULL zoom kutusu"],["y",1590,"r","altyazı · 330 px"]])}`,
+      frame(t, q, stage) {
+        const z0 = .45, zd = .6, p = settle(t - z0, zd), s = lerp(1, 2.3, p);
+        const fx = 500, fy = 30 + rowY;   // focus in window coordinates
+        const full = {x: 56, y: 600 - 280};
+        const tx = lerp(full.x, 540 - s * fx, p), ty = lerp(full.y, 625 - s * fy, p);
+        q("win").setAttribute("transform", `translate(${tx} ${ty}) scale(${s})`);
+        q("band").setAttribute("opacity", clamp01((t - z0 - zd - .05) / .12));
+        stage.setCap(t < z0 + zd * .6 ? 0 : 1);
+      }};
+  },
+  caption() {   // FACE with the caption chunks: ≤ 3 words each, the key word in clay
+    const n = ++uid;
+    return {dur: 3.3,
+      svg: `<defs><linearGradient id="tk${n}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b3d39"/><stop offset="1" stop-color="#211b19"/></linearGradient>${person("p" + n)}</defs>
+        ${takeBg("tk" + n)}<use href="#p${n}"/>
+        ${dims([["y",1590,"r","alt kenar 330 px"],["y",1486,"ra","Bebas 78 px hap"]])}`,
+      frame(t, q, stage) { stage.setCap(Math.min(2, Math.floor(t / 1.1))); }};
+  },
+};
+
+/* ---------- stages ---------- */
+const live = new Set();
+function capHTML(parts) { return parts.map(p => Array.isArray(p) ? `<b>${p[0]}</b>` : p).join(""); }
+function makeStage(el, style, withBadge) {
+  const d = DRAW[style.draw]();
+  el.innerHTML = `<svg viewBox="0 0 1080 1920" aria-hidden="true">${d.svg}</svg>` +
+    (withBadge ? `<span class="badge ${style.status}">${STATUS[style.status]}</span>` : "") + `<div class="cap"></div>`;
+  const svg = el.querySelector("svg"), cap = el.querySelector(".cap");
+  const st = {el, d, style, cur: -1, visible: false,
+    q: (r) => svg.querySelector(`[data-r="${r}"]`),
+    setCap(i) { if (i === st.cur) return; st.cur = i; cap.innerHTML = capHTML(style.cap[i] || style.cap[0]);
+      cap.classList.remove("pop"); void cap.offsetWidth; cap.classList.add("pop"); }};
+  st.setCap(0);
+  st.render = (t) => d.frame(t, st.q, st);
+  st.render(d.dur * .8);   // a representative still before the loop starts (and for reduced motion)
+  live.add(st);
+  return st;
+}
+const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+let frozen = null;
+function tick(now) {
+  if (frozen === null && !reduce.matches) {
+    for (const st of live) if (st.visible) st.render((now / 1000) % st.d.dur);
+  }
+  requestAnimationFrame(tick);
+}
+const io = new IntersectionObserver((es) => es.forEach(e => { const st = [...live].find(s => s.el === e.target); if (st) st.visible = e.isIntersecting; }));
+window.__kurguSeek = (t) => { frozen = t; for (const st of live) st.render(Math.min(t, st.d.dur - .001)); };   // stills for checks
+
+/* ---------- page ---------- */
+let section = "stiller", group = null;
+function counts(sec) { return STYLES.filter(s => s.sec === sec).length; }
+function renderNav() {
+  const nav = document.getElementById("nav");
+  nav.innerHTML = SECTIONS.map(s => `<button type="button" data-sec="${s.id}" aria-current="${s.id === section}"><span class="ic" style="background:${s.color}">${s.ic}</span>${s.name}<span class="n">${counts(s.id)}</span></button>`).join("");
+  nav.querySelectorAll("button").forEach(b => b.onclick = () => { section = b.dataset.sec; group = null; render(); });
+}
+function render() {
+  renderNav();
+  const sec = SECTIONS.find(s => s.id === section);
+  document.getElementById("sec-title").textContent = sec.name;
+  document.getElementById("sec-desc").textContent = sec.desc;
+  const items = STYLES.filter(s => s.sec === section);
+  const f = document.getElementById("filters");
+  f.hidden = section !== "stiller";
+  if (section === "stiller") {
+    f.innerHTML = `<button type="button" class="chip-f" aria-pressed="${group === null}" data-g="">Tümü<span class="c">${items.length}</span></button>` +
+      GROUPS.map(g => { const c = items.filter(s => s.group === g).length;
+        return `<button type="button" class="chip-f" aria-pressed="${group === g}" data-g="${g}" ${c ? "" : "disabled"}>${g}<span class="c">${c}</span></button>`; }).join("");
+    f.querySelectorAll(".chip-f").forEach(b => b.onclick = () => { group = b.dataset.g || null; render(); });
+  }
+  const grid = document.getElementById("grid"), empty = document.getElementById("empty");
+  [...live].forEach(st => { if (grid.contains(st.el)) { io.unobserve(st.el); live.delete(st); } });
+  const shown = items.filter(s => !group || s.group === group);
+  grid.hidden = !shown.length; empty.hidden = !!shown.length;
+  if (!shown.length) { empty.innerHTML = `<strong>Henüz kart yok</strong>${sec.empty || ""}`; grid.innerHTML = ""; return; }
+  grid.innerHTML = shown.map(s => `<button type="button" class="card" data-id="${s.id}" aria-label="${s.name}"><div class="stage"></div>
+    <div class="meta"><h3>${s.name}</h3><p class="line">${s.line}</p><div class="tags">${s.tags.map(t => `<span class="tag">${t}</span>`).join("")}</div></div></button>`).join("");
+  grid.querySelectorAll(".card").forEach(c => {
+    const s = STYLES.find(x => x.id === c.dataset.id);
+    const st = makeStage(c.querySelector(".stage"), s, true); io.observe(st.el);
+    c.onclick = () => openDetail(s);
+  });
+}
+
+/* ---------- detail ---------- */
+const sheet = document.getElementById("sheet");
+let detailStage = null, lastFocus = null;
+function openDetail(s) {
+  lastFocus = document.activeElement;
+  const box = document.getElementById("d-stage");
+  if (detailStage) { live.delete(detailStage); io.unobserve(detailStage.el); }
+  detailStage = makeStage(box, s, false); detailStage.visible = true;
+  const dimsBtn = document.getElementById("d-dims");
+  dimsBtn.setAttribute("aria-pressed", "false"); box.classList.remove("show-dims"); dimsBtn.textContent = "Ölçüleri göster";
+  document.getElementById("d-title").textContent = s.name;
+  document.getElementById("d-line").textContent = s.line;
+  document.getElementById("d-status").innerHTML = `<span class="status ${s.status}">${STATUS[s.status]}${s.date ? " · " + s.date : ""}</span>` + (s.statusNote ? `<p class="note">${s.statusNote}</p>` : "");
+  document.getElementById("d-when").textContent = s.when;
+  document.getElementById("d-rules").innerHTML = s.rules.map(r => `<li>${r}</li>`).join("");
+  document.getElementById("d-quote").innerHTML = `"${s.quote}"<span>${s.quoteWho}</span>`;
+  document.getElementById("d-src").innerHTML = s.src.map(x => `<div>${x}</div>`).join("");
+  document.getElementById("d-ex").innerHTML = s.ex.map(x => `<div>${x}</div>`).join("");
+  sheet.hidden = false;
+  document.getElementById("d-close").focus();
+}
+function closeDetail() { sheet.hidden = true; if (detailStage) { live.delete(detailStage); detailStage = null; } if (lastFocus) lastFocus.focus(); }
+document.getElementById("d-close").onclick = closeDetail;
+sheet.addEventListener("click", (e) => { if (e.target === sheet) closeDetail(); });
+document.addEventListener("keydown", (e) => { if (e.key === "Escape" && !sheet.hidden) closeDetail(); });
+document.getElementById("d-dims").onclick = (e) => {
+  const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+  e.currentTarget.setAttribute("aria-pressed", String(on));
+  e.currentTarget.textContent = on ? "Ölçüleri gizle" : "Ölçüleri göster";
+  document.getElementById("d-stage").classList.toggle("show-dims", on);
+};
+
+render();
+requestAnimationFrame(tick);
+</script>
+
+</body>
+</html>

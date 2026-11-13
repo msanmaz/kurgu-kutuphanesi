@@ -1,0 +1,61 @@
+{
+  "id": "ref-once-sonra-perde",
+  "group": "Geçiş",
+  "name": "Önce/sonra perdesi",
+  "line": "İnce bir çizgi soldan sağa geçer; arkasında işlenmiş görüntü. Çip \"ÖNCE\"den \"SONRA\"ya döner.",
+  "when": "Bir işlemin farkını göstermek için: renk, temizlik, düzeltme; aynı karenin iki hâli.",
+  "tags": [
+    "≈ 0,4 sn",
+    "aynı kare",
+    "çip"
+  ],
+  "rules": [
+    "Perde ≈ 0,4 sn, yavaş başlar yavaş biter; önde ince beyaz çizgi, 40 px geride daha soluk ikinci çizgi.",
+    "Çip sol üstte (x 40, y 70): önce koyu \"ÖNCE\", perde bitince bordo \"SONRA\".",
+    "Onda (MIRACLE 2,1–3,1 sn): sonuç kartı tam ekrana büyür, \"ORIGINAL\" çipi, perde, limon yeşili \"GRADED\".",
+    "Bizde _shots/BeforeAfter916 var (≥ 5 sn ister); bu daha kısa, 1,5 sn'lik hâli."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Reel'den aday: kanalda henüz kullanılmadı; benimsemek creator'ın kararı.",
+    "quote": "review the videos of this apify or ytdl whivere gets the best free results and then understand breakdown editing style and etc to have some fresh ones added to our kurgu kutuphanesi",
+    "quoteWho": "Creator, 2026-11-12, @viashaan profilinin incelenmesini isterken",
+    "sources": [
+      "Reels/analysis_reference_viashaan_profile_2026-11-12.md · Edit devices 11"
+    ],
+    "examples": [
+      "https://www.instagram.com/reel/DfiYWMvMOqV/ (0:02.1–0:03.1)"
+    ]
+  },
+  "template": "wipeCompare",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "@viashaan · DfiYWMvMOqV",
+    "at": "0:02.1–0:03.1",
+    "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+  },
+  "variations": [
+    {
+      "id": "ref-once-sonra-perde-yavas",
+      "name": "Yavaş perde",
+      "line": "Perde 1 sn sürer; fark daha uzun görülür.",
+      "changed": "0,4 yerine 1 sn",
+      "params": {
+        "wipeDur": 1.0
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfiYWMvMOqV",
+        "at": "0:02.5–0:03.0",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+{
+  "id": "ref-sozcuk-akisi",
+  "group": "Yazı",
+  "name": "Kafanın etrafında dönen sözcükler",
+  "line": "Her sözcük bulanık girip netleşir, kafanın çevresinde döner; arka yarıda kafanın arkasından geçer.",
+  "when": "Açılışta, ekrandaki tuhaflığı soran ilk cümlede (onda: \"Wait, how are these words going behind my head?\").",
+  "tags": [
+    "matte",
+    "açılış",
+    "0,25 sn/sözcük"
+  ],
+  "rules": [
+    "Sözcükler ≈ 0,25 sn arayla, konuşmayla aynı anda girer; her biri 0,1 sn'de bulanıktan netleşir.",
+    "Yörünge kafanın çevresinde yatık bir elips: ön yarıda kişinin önünde, arka yarıda matte'in arkasında, küçülüp bulanıklaşarak.",
+    "Eski sözcükler ≈ 1,5 sn sonra söner; ekranda aynı anda 4–5 sözcük kalır, üst üste binmesin diye.",
+    "Onda: ilk sözcük italik serif, kalanlar kalın grotesk. Bizde: Inter 700 + Playfair italik.",
+    "Uyarı: açıklama cümlesi için değil, yalnız efekti gösteren açılış cümlesi için; okunabilirlik düşük.",
+    "Ön yarı baş alanının üstünden geçer (y < 660), arka yarı kafanın arkasından; yüzün önüne sözcük gelmez.",
+    "Baş kuralı (creator, 2026-11-12, overlays-avoid-head): yazı, kutu ve işaret baş alanına (yüz kutusu + üstte %65, yanlarda ±%20) binmez; kafanın arkasındaki yazı tek istisna."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Reel'den aday: kanalda henüz kullanılmadı; benimsemek creator'ın kararı.",
+    "quote": "review the videos of this apify or ytdl whivere gets the best free results and then understand breakdown editing style and etc to have some fresh ones added to our kurgu kutuphanesi",
+    "quoteWho": "Creator, 2026-11-12, @viashaan profilinin incelenmesini isterken",
+    "sources": [
+      "Reels/analysis_reference_viashaan_profile_2026-11-12.md · Edit devices 1"
+    ],
+    "examples": [
+      "https://www.instagram.com/reel/DfMiYjYRbMI/ (0:00–0:01.5)"
+    ]
+  },
+  "template": "wordStream",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "@viashaan · DfMiYjYRbMI",
+    "at": "0:00–0:01.5",
+    "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+  },
+  "variations": [
+    {
+      "id": "ref-sozcuk-akisi-yavas",
+      "name": "Yavaş akış",
+      "line": "Sözcükler 0,4 sn arayla; bizim ≈ 2,9 sözcük/sn konuşmamıza daha yakın.",
+      "changed": "0,28 yerine 0,4 sn/sözcük, yörünge yavaş",
+      "params": {
+        "perWord": 0.4,
+        "orbit": 110
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfMiYjYRbMI",
+        "at": "0:00–0:01.5",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

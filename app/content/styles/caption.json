@@ -1,0 +1,143 @@
+{
+  "id": "caption",
+  "group": "Yazı",
+  "name": "Altyazı hapı",
+  "line": "Poppins Bold, en çok üç sözcük; anahtar sözcük kil renkli iç hapta.",
+  "when": "Her konuşma anında; yüzde, PANEL'de ve FULL'de aynı yerde.",
+  "tags": [
+    "her beat",
+    "≤ 3 sözcük"
+  ],
+  "rules": [
+    "Poppins Bold 60 px, büyük harf, beyaz, rgba(20,20,19,.9) hap, yarıçap 14, iç boşluk 13/26/13. Yazı tipi creator kararı (2026-10-25); boyut, kalınlık ve harf düzeni Claude'un önerisi, seçim bekliyor (varyasyonlara bak).",
+    "Neden 60 px: Poppins, Bebas'tan çok daha geniş. En uzun örnek parça (CLAUDE CODE'A VERİP) Bebas 78 px'te 578 px'lik hap, Poppins 78 px'te 933 px (karenin %86'sı), Poppins 60 px'te 735 px olur (Chrome'da ölçüldü, 2026-10-25).",
+    "Anahtar sözcük #D97757 iç hapta.",
+    "Parça başına en çok 3 sözcük; dengeli böl, tek sözcük kuyruk bırakma.",
+    "Alt kenar 330 px; 150 px'te Reels arayüzünün altında kalıyordu.",
+    "Metin düzeltilmiş sözcüklerden; belirsiz sözcük tahmin edilmez, kulakla kontrol edilir."
+  ],
+  "vault": {
+    "status": "adopted",
+    "date": "2026-10-11",
+    "statusCheckedAt": "2026-10-25",
+    "quote": "this process and visual language was great",
+    "quoteWho": "Creator, 2026-10-11, F1 v9 görsel dili için",
+    "sources": [
+      "50-design-language/reel-visual-language.md · Captions",
+      "50-design-language/channel-fonts.md · Captions"
+    ],
+    "examples": [
+      "Bütün kayıtlı Reel'ler; örnek: devmert7/mulakat-kayan-pencere/take-v3-2026-10-23/motion-v1/"
+    ]
+  },
+  "template": "caption",
+  "params": {},
+  "caption": [
+    [
+      "İNSANLAR ",
+      {
+        "k": "ŞU AN"
+      }
+    ],
+    [
+      {
+        "k": "CLAUDE CODE'A"
+      },
+      " VERİP"
+    ],
+    [
+      "İÇİNDEKİ ",
+      {
+        "k": "REKLAMLARI"
+      }
+    ]
+  ],
+  "initialLabel": "Kullanımda",
+  "origin": {
+    "kind": "vault"
+  },
+  "variations": [
+    {
+      "id": "caption-bant",
+      "name": "Altyazı bantta",
+      "line": "Hap PANEL ile kafa arasındaki boşlukta (y 720–823); T2 geniş kesmede gerekli.",
+      "changed": "Alt kenar 330 yerine bant",
+      "params": {
+        "captionMode": "band"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "caption parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "caption-hizli",
+      "name": "Hızlı parçalar (0,7 sn)",
+      "line": "Parçalar daha hızlı değişir; okuma süresine dikkat.",
+      "changed": "Parça süresi 1,1 sn yerine 0,7 sn",
+      "params": {
+        "chunkDur": 0.7
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "caption parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "caption-dogal",
+      "name": "Poppins, doğal yazım",
+      "line": "Büyük harf yerine cümle yazımı; SemiBold 66 px, küçük harfler daha dar olduğu için biraz büyür.",
+      "changed": "Büyük harf yerine doğal yazım; Bold 60 px yerine SemiBold 66 px",
+      "params": {
+        "captionWeight": 600,
+        "captionSize": 66
+      },
+      "caption": [
+        [
+          "İnsanlar ",
+          {
+            "k": "şu an"
+          }
+        ],
+        [
+          {
+            "k": "Claude Code'a"
+          },
+          " verip"
+        ],
+        [
+          "içindeki ",
+          {
+            "k": "reklamları"
+          }
+        ]
+      ],
+      "origin": {
+        "kind": "claude",
+        "basis": "channel-fonts: altyazı boyutu ve harf düzeni ilk yapımda seçilir"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "caption-helvetica",
+      "name": "Helvetica Neue Bold",
+      "line": "Aynı hap, Helvetica Neue Bold 58 px. Sistem yazı tipi: yalnız bu Mac'teki yapımlarda, pakete konmaz.",
+      "changed": "Poppins yerine Helvetica Neue, 60 px yerine 58 px",
+      "params": {
+        "captionFont": "helvetica",
+        "captionSize": 58
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "channel-fonts: altyazı yazı tipleri Poppins, Helvetica"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    }
+  ]
+}

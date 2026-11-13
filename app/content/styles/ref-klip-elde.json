@@ -1,0 +1,81 @@
+{
+  "id": "ref-klip-elde",
+  "group": "Yerleşim",
+  "name": "Efekt klibi önünde, sonra başını kaldırır",
+  "line": "Telefona bakarken efekt klibi göğsünün önünde oynar; kanca yazısı üstte. 2,5–7 sn sonra başını kaldırıp kameraya bakar, uygulama alttan iter.",
+  "when": "Başkasının efektini ya da bir sonucu \"nasıl yapılır\" diye açarken; konuşmadan önce sonucu göstermek için.",
+  "tags": [
+    "açılış",
+    "sessiz kanca",
+    "kaynak etiketi"
+  ],
+  "rules": [
+    "Klip çerçeveli panel: 16:9 (620×349) ya da 9:16 \"ORİJİNAL\" etiketli, kaynağı yazılı.",
+    "Kanca sol üstte, Inter 800 büyük harf, son sözcük bordo: \"BUNU NASIL / YAPARSIN…\".",
+    "Başını kaldırma yumuşak yayla ≈ 0,3 sn; 0,8 sn sonra uygulama ekranı alttan 0,35 sn'de iter.",
+    "Onda XRAY'in en çok izlenen yüklemesi (22.246) klibi 7,06 sn sessiz oynatıyor; diğer dördü ≈ 3 sn (1.258–1.891). Tek anlık ölçüm.",
+    "Başkasının klibi kaynak gösterilmeden ve izinsiz kullanılmaz; bizde kendi sonucumuz ya da hakkı temiz klip.",
+    "Klip paneli göğsün önünde, baş alanının altında ya da yanında; yüzün önüne gelmez.",
+    "Baş kuralı (creator, 2026-11-12, overlays-avoid-head): yazı, kutu ve işaret baş alanına (yüz kutusu + üstte %65, yanlarda ±%20) binmez; kafanın arkasındaki yazı tek istisna."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Reel'den aday: kanalda henüz kullanılmadı; benimsemek creator'ın kararı.",
+    "quote": "review the videos of this apify or ytdl whivere gets the best free results and then understand breakdown editing style and etc to have some fresh ones added to our kurgu kutuphanesi",
+    "quoteWho": "Creator, 2026-11-12, @viashaan profilinin incelenmesini isterken",
+    "sources": [
+      "Reels/analysis_reference_viashaan_profile_2026-11-12.md · Edit devices 15"
+    ],
+    "examples": [
+      "https://www.instagram.com/reel/DfkEeRNjgXB/ (0:00–0:07)"
+    ]
+  },
+  "template": "clipHold",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "@viashaan · DfkEeRNjgXB",
+    "at": "0:00–0:07",
+    "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+  },
+  "variations": [
+    {
+      "id": "ref-klip-elde-dikey",
+      "name": "Dikey ORİJİNAL klip",
+      "line": "9:16 klip, \"ORİJİNAL\" etiketi ve kaynak satırıyla.",
+      "changed": "16:9 yerine 9:16, kaynak etiketi",
+      "params": {
+        "clip": "tall"
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfmoPxaipnU",
+        "at": "0:00–0:03",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    },
+    {
+      "id": "ref-klip-elde-uzun",
+      "name": "Uzun sessiz açılış",
+      "line": "Başını 6 sn'de kaldırır; sonuç konuşmadan önce bütünüyle oynar.",
+      "changed": "2,6 yerine 6 sn",
+      "params": {
+        "lookUpAt": 6
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfkEeRNjgXB",
+        "at": "0:00–0:07",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

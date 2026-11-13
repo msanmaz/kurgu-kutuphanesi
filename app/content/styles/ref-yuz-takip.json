@@ -1,0 +1,64 @@
+{
+  "id": "ref-yuz-takip",
+  "group": "Vurgu",
+  "name": "Yüz takip çerçevesi",
+  "line": "Köşe parantezleri yüze kilitlenir; mono okuma harf harf yazılır, sayılar saniyede 10 kez değişir.",
+  "when": "Bir aracın \"gördüğünü\" anlatırken: yüz algılama, takip, makinenin baktığı yer.",
+  "tags": [
+    "HUD",
+    "10/sn",
+    "mono"
+  ],
+  "rules": [
+    "Parantezler 1,25'ten 1'e 0,3 sn'de oturur; kişi kıpırdadıkça bir kare geriden izler.",
+    "Etiket 0,03 sn/harf yazılır (\"YÜZ 0.93\" / \"X 0746 Y 0774\"); sayılar hz parametresiyle değişir (onda 10/sn, söylenenle aynı).",
+    "\"10x\" büyük mono, kilitten 1,4 sn sonra bulanıktan gelir.",
+    "Onda sarı; bizde bordo (#D2557C), etiket krem JetBrains Mono.",
+    "Gerçek veri değilse \"temsili\" demek gerekir; gerçek takip verisi varsa sayılar ondan gelir.",
+    "Onda nişangâh işaretleri yüzün üstünde; bizde parantezler baş alanının köşelerinde, yüzün üstünde işaret yok, \"10x\" başın üstünde.",
+    "Baş kuralı (creator, 2026-11-12, overlays-avoid-head): yazı, kutu ve işaret baş alanına (yüz kutusu + üstte %65, yanlarda ±%20) binmez; kafanın arkasındaki yazı tek istisna."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-12",
+    "statusCheckedAt": "2026-11-12",
+    "note": "Reel'den aday: kanalda henüz kullanılmadı; benimsemek creator'ın kararı.",
+    "quote": "review the videos of this apify or ytdl whivere gets the best free results and then understand breakdown editing style and etc to have some fresh ones added to our kurgu kutuphanesi",
+    "quoteWho": "Creator, 2026-11-12, @viashaan profilinin incelenmesini isterken",
+    "sources": [
+      "Reels/analysis_reference_viashaan_profile_2026-11-12.md · Edit devices 5"
+    ],
+    "examples": [
+      "https://www.instagram.com/reel/DfMiYjYRbMI/ (0:15.5–0:18.5)"
+    ]
+  },
+  "template": "faceHud",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "@viashaan · DfMiYjYRbMI",
+    "at": "0:15.5–0:18.5",
+    "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+  },
+  "variations": [
+    {
+      "id": "ref-yuz-takip-yavas",
+      "name": "Yavaş okuma (4/sn)",
+      "line": "Sayılar saniyede 4 kez değişir; okunur, daha sakin.",
+      "changed": "10/sn yerine 4/sn",
+      "params": {
+        "hz": 4
+      },
+      "origin": {
+        "kind": "reference",
+        "reel": "@viashaan · DfMiYjYRbMI",
+        "at": "0:15.5–0:18.5",
+        "analysis": "Reels/analysis_reference_viashaan_profile_2026-11-12.md"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-12"
+    }
+  ]
+}

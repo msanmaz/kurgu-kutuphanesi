@@ -1,0 +1,82 @@
+{
+  "id": "popout",
+  "group": "Yerleşim",
+  "name": "Pop-out yarım kesim",
+  "line": "Çekim yuvarlak bir kartın içinde; kafa kartın üst kenarından sayfaya taşar.",
+  "when": "PANEL beatlerinde, yüzü bir kutuya sıkıştırmadan görsel ile yüzü birlikte göstermek için.",
+  "tags": [
+    "9:16",
+    "POP",
+    "matte"
+  ],
+  "rules": [
+    "Kart x 40–1040, üst köşe yarıçapı 36, alttan taşar.",
+    "Kart üstü, çekimde ölçülen kafa üstünden: 1020 (şapka) ya da 1140 (şapka ve saç).",
+    "Kafa, Apple Vision kişi matte'inden: 90–200 açılır, 1 px aşındırılır, σ 1,0 yumuşatılır; yalnız kart üstünün üstünde görünür (+24 px yumuşak kenar).",
+    "Yeşil perde yok; kart gerçek odayı gösterir.",
+    "PANEL klibi değişmez; kutu y 60–660, içerik ≤ 645."
+  ],
+  "vault": {
+    "status": "candidate",
+    "statusCheckedAt": "2026-10-25",
+    "note": "Pop-out hâlâ aday. Görünümü koyu: 2026-10-25'ten beri yeni Reel'lerin varsayılanı.",
+    "quote": "update our vault halfcut to make matching the nick and the other guy we wont have green screen or anything",
+    "quoteWho": "Creator, 2026-10-24",
+    "sources": [
+      "50-design-language/halfcut-talking-head-frame.md",
+      "devmert7/HALFCUT-FRAME.md",
+      "devmert7/_tools/popout/"
+    ],
+    "examples": [
+      "devmert7/popout-halfcut-test-2026-10-24/",
+      "devmert7/trend-repo-format-2026-10-24/storyboard-v1/"
+    ]
+  },
+  "template": "popout",
+  "params": {},
+  "caption": [
+    [
+      "KAFA ",
+      {
+        "k": "DIŞARI"
+      },
+      " TAŞAR"
+    ]
+  ],
+  "initialLabel": "Düşünülüyor",
+  "origin": {
+    "kind": "vault"
+  },
+  "variations": [
+    {
+      "id": "popout-1020",
+      "name": "Pop-out, sığ kart (1020)",
+      "line": "Yalnız şapkanın tepesi karttan taşar (Kallaway derinliği).",
+      "changed": "Kart üstü 1140 yerine 1020",
+      "params": {
+        "cardTop": 1020
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "popout parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    },
+    {
+      "id": "popout-bant",
+      "name": "Pop-out, altyazı bantta",
+      "line": "Altyazı PANEL ile kafa arasındaki boşlukta (y 720–823), iki referanstaki gibi.",
+      "changed": "Altyazı alt kenar 330 yerine bantta",
+      "params": {
+        "captionMode": "band"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "popout parametreleri"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-10-25"
+    }
+  ]
+}

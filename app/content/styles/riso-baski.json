@@ -1,0 +1,79 @@
+{
+  "id": "riso-baski",
+  "group": "Görünüm",
+  "name": "Riso baskı",
+  "line": "Kare iki mürekkebe kısılır: kâğıt üstünde grenli siyah, sözcükler bordo; gren saniyede 12 kez yeniden atılır.",
+  "when": "Bir düşünceyi gerçek andan ayırmak (\"Kafandaki ilk ses: nereden başlasam?\"), ya da kapak fikri.",
+  "tags": [
+    "görünüm",
+    "gren",
+    "iki mürekkep"
+  ],
+  "rules": [
+    "Hareket (ölçüldü): iki kısılmış çekim arasında sert kesme (A: kâğıt üstünde siyah 1,6 sn, B: bordo üst baskı 2,1 sn), döngü 3,7 sn. Erime (dissolve) yok.",
+    "Gren durağandır, görüntüye bağlıdır: yalnız çekim adım attığında (düşük kare hızı, ≈ 8 fps) değişir. Yazı hareket etmez.",
+    "Filtre: gri tonlama → gürültü eklenir → her ton ya mürekkep ya kâğıt (#F1EEE6).",
+    "Başlık Anton, bordo mürekkep, satır yüksekliği 1,12; kafanın üstünde biter. Kafa arkasına girmez: Ş'nin çengeli şapkanın, Ü'nün noktaları üst satırın arkasında kayboluyordu.",
+    "Küçük satır Playfair italik, gri, sol altta (şablonun serif satırı).",
+    "İki mürekkep (B çekimi) yüzünün üstünden geçer: baş kuralı gereği creator kararı. Yalnız tek bir an için; bütün Reel'e uygulanmaz."
+  ],
+  "vault": {
+    "status": "candidate",
+    "date": "2026-11-13",
+    "statusCheckedAt": "2026-11-13",
+    "note": "Gerçek çekimde (take v1) test edildi, baş kontrolü 0 px. Hareket Jitter önizlemesinden ölçüldü (docs/2026-11-13-jitter-motion-measurements.md); bizim uyarlamalar ayrıca yazılı. Görünüş ve hareket creator onayı bekliyor. Jitter dosyası/görselleri kullanılmadı.",
+    "quote": "can you use animation vocabulary skills and review jitter to get properly motions",
+    "quoteWho": "Creator, 2026-11-13, kartlar eklendikten sonra hareketlerin Jitter'a göre düzeltilmesini isterken",
+    "sources": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/riso-clamp-test/README.md",
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/riso-clamp-test/build.py",
+      "devmert7/kurgu-kutuphanesi/docs/2026-11-13-jitter-motion-measurements.md"
+    ],
+    "examples": [
+      "devmert7/ai-mulakat-kabul-mu-kontrol-mu/riso-clamp-test/sheets/riso-clamp.png",
+      "https://jitter.video/template/grainy-color-clamp/"
+    ]
+  },
+  "template": "risoPrint",
+  "params": {},
+  "caption": [],
+  "initialLabel": "Yeni",
+  "origin": {
+    "kind": "reference",
+    "reel": "Jitter şablonu · grainy-color-clamp",
+    "at": "4 sn döngü",
+    "analysis": "devmert7/ai-mulakat-kabul-mu-kontrol-mu/riso-clamp-test/README.md"
+  },
+  "variations": [
+    {
+      "id": "riso-baski-iki",
+      "name": "İki mürekkep",
+      "line": "Bordo yakın plan üstüne basılıp çıkar (şablondaki ikinci çekim).",
+      "changed": "İkinci mürekkep açık",
+      "params": {
+        "inks": "two"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "riso testi R2"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    },
+    {
+      "id": "riso-baski-kapak",
+      "name": "Kapak fikri",
+      "line": "Aynı baskı, \"YAPAY ZEKALI MÜLAKAT\" gri başlık ve \"3 adım\".",
+      "changed": "Başlık kapak",
+      "params": {
+        "headline": "kapak"
+      },
+      "origin": {
+        "kind": "claude",
+        "basis": "riso testi R3"
+      },
+      "initialLabel": "Yeni",
+      "addedAt": "2026-11-13"
+    }
+  ]
+}

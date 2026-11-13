@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+/* Local fonts, latin + latin-ext subsets (Turkish needs latin-ext: İ ı Ş ş Ğ ğ).
+   Channel fonts (50-design-language/channel-fonts.md, creator 2026-10-25): Anton titles, Playfair Display italic
+   as the second voice, Poppins captions and text, JetBrains Mono for code. Files and licences: devmert7/assets/fonts/. */
+@font-face { font-family: Anton; src: url("/fonts/Anton-latin.woff2") format("woff2"); font-display: swap; }
+@font-face { font-family: Anton; src: url("/fonts/Anton-latin-ext.woff2") format("woff2"); unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("/fonts/PlayfairDisplay-italic-latin.woff2") format("woff2"); font-style: italic; font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Playfair Display"; src: url("/fonts/PlayfairDisplay-italic-latin-ext.woff2") format("woff2"); font-style: italic; font-weight: 400 900; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-400-latin.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-400-latin-ext.woff2") format("woff2"); font-weight: 400; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-500-latin.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-500-latin-ext.woff2") format("woff2"); font-weight: 500; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-600-latin.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-600-latin-ext.woff2") format("woff2"); font-weight: 600; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-700-latin.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: Poppins; src: url("/fonts/Poppins-700-latin-ext.woff2") format("woff2"); font-weight: 700; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+@font-face { font-family: Mono; src: url("/fonts/JetBrainsMono-latin.woff2") format("woff2"); font-weight: 100 800; font-display: swap; }
+@font-face { font-family: Mono; src: url("/fonts/JetBrainsMono-latin-ext.woff2") format("woff2"); font-weight: 100 800; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+/* Inter: the one-word caption font adopted 2026-11-11 (channel-fonts.md); used by the 2026-11-12 reference cards. */
+@font-face { font-family: Inter; src: url("/fonts/Inter-latin.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+@font-face { font-family: Inter; src: url("/fonts/Inter-latin-ext.woff2") format("woff2"); font-weight: 100 900; unicode-range: U+0100-024F, U+1E00-1EFF; font-display: swap; }
+
+/* devmert7 dark look: the approved sliding-window Reel's tokens (default for new Reels since 2026-10-25). */
+@theme {
+  --color-ground: #141413;
+  --color-ground-hi: #2a2826;
+  --color-box: #161615;
+  --color-win: #1E1E1E;
+  --color-bar: #2A2A2C;
+  --color-edge: #3a3a3c;
+  --color-text: #ECEAE4;
+  --color-dim: #B9B6AC;
+  --color-muted: #87867F;
+  --color-clay: #D97757;
+  --color-confirm: #6B8F71;
+  --color-sky: #6A9BCC;
+  --color-reject: #B8564B;
+  --font-display: Anton, Impact, "Arial Narrow", sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  --font-body: Poppins, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: Mono, ui-monospace, Menlo, monospace;
+}
+
+[hidden] { display: none !important; }
+
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, #2a2826 0%, #141413 70%) fixed, #141413;
+  color: var(--color-text);
+  font-family: var(--font-body);
+}
